@@ -5,8 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF_53_2016_GUI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Salon Namestaja" Height="300" Width="500" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Window.Background>
+        <ImageBrush ImageSource="Image/salon.jpg"></ImageBrush>
+    </Window.Background>
     <Grid>
-        
+        <Label Content="Korisnicko Ime" HorizontalAlignment="Left" Margin="50,84,0,0" VerticalAlignment="Top" Width="125" FontSize="18"/>
+        <Label Content="Sifra" HorizontalAlignment="Left" Margin="50,127,0,0" VerticalAlignment="Top" Width="125" FontSize="18"/>
+        <TextBox HorizontalAlignment="Left" Height="34" Margin="180,84,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="160" FontSize="18"/>
+        <PasswordBox HorizontalAlignment="Left" Margin="180,127,0,0" VerticalAlignment="Top" Width="160" Height="34"/>
+        <Button Content="Potvrdi" HorizontalAlignment="Left" Margin="180,180,0,0" VerticalAlignment="Top" Width="75" Height="34"/>
+        <Button Content="Otkazi" HorizontalAlignment="Left" Margin="265,180,0,0" VerticalAlignment="Top" Width="75" Height="34"/>
+
     </Grid>
 </Window>
