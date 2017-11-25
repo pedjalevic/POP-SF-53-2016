@@ -54,6 +54,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Projekat.cs" />
     <Compile Include="Utils\GenericSerializer.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -103,6 +104,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Image\salon.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Data\Korisnici.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

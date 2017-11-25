@@ -12,7 +12,7 @@ namespace POP_SF_53_2016_GUI.Model
         Administrator,
         Prodavac
     }
-    class Korisnik
+    public class Korisnik
     {
         public int ID { get; set; }
         public bool Obrisan { get; set; }
