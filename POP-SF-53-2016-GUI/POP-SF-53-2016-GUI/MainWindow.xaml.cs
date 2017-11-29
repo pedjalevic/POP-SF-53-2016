@@ -1,4 +1,5 @@
 ﻿using POP_SF_53_2016_GUI.Model;
+using POP_SF_53_2016_GUI.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,7 @@ namespace POP_SF_53_2016_GUI
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static string loggedUser { set; get; }
 
         public MainWindow()
         {
@@ -30,29 +32,33 @@ namespace POP_SF_53_2016_GUI
 
         private void Prijava(object sender, RoutedEventArgs e)
         {
-            {
-                var korisnici = Projekat.Instance.Korisnici;
-                foreach (var korisnik in korisnici)
-                {
-                    var userName = tbKorisnickoIme.Text.Trim();
-                    var password = pbSifra.Password.Trim();
-                    if (userName == "" || password == "")
-                    {
-                        MessageBox.Show("Morate uneti sve podatke!", "Greska", MessageBoxButton.OK, MessageBoxImage.Warning);
-                        return;
-                    }
-                    else if (userName == korisnik.KorisnickoIme && password == korisnik.Lozinka)
-                    {
-                        MessageBox.Show("Uneti podaci su tacni", "Greska", MessageBoxButton.OK, MessageBoxImage.Error);
-                        return;
-                    }
 
+            var korisnici = Projekat.Instance.Korisnici;
+            foreach (var korisnik in korisnici)
+            {
+                var userName = tbKorisnickoIme.Text.Trim();
+                var password = pbSifra.Password.Trim();
+                if (userName == "" || password == "")
+                {
+                    MessageBox.Show("Morate uneti sve podatke!", "Greska", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
                 }
-                MessageBox.Show("Uneti podaci nisu tacni", "Greska", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
+                else if (userName == korisnik.KorisnickoIme && password == korisnik.Lozinka)
+                {
+                    loggedUser = userName;
+                    var glavni = new GlavniProzor();
+                    this.Close();
+                    glavni.ShowDialog();
+                    return;
+                }
+
             }
+            MessageBox.Show("Uneti podaci nisu tacni", "Greska", MessageBoxButton.OK, MessageBoxImage.Error);
+            return;
+
         }
-    private void Izadji(object sender, RoutedEventArgs e)
+
+        private void Izadji(object sender, RoutedEventArgs e)
         {
             this.Close();
         }

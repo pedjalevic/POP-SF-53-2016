@@ -55,6 +55,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\Projekat.cs" />
+    <Compile Include="UI\GlavniProzor.xaml.cs">
+      <DependentUpon>GlavniProzor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Utils\GenericSerializer.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -68,6 +71,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UI\GlavniProzor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Akcija.cs" />
@@ -103,10 +110,25 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Image\salon.jpg" />
+    <Resource Include="Image\Salon.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Data\Korisnici.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Data\Akcije.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Data\Namestaj.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Data\DodatneUsluge.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Data\ProdajaNamestaja.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Data\TipNamestaja.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

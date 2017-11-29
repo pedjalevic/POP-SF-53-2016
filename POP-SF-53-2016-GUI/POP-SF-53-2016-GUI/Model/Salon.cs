@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace POP_SF_53_2016_GUI.Model
 {
-    class Salon
+     public class Salon
     {
         public int Id { get; set; }
         private string Naziv { get; set; }

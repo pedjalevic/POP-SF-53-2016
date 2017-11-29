@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Salon Namestaja" Height="300" Width="500" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Window.Background>
-        <ImageBrush ImageSource="Image/salon.jpg"></ImageBrush>
+        <ImageBrush ImageSource="Image/Salon.jpg"></ImageBrush>
     </Window.Background>
     <Grid>
         <Label Content="Korisnicko Ime" HorizontalAlignment="Left" Margin="50,84,0,0" VerticalAlignment="Top" Width="125" FontSize="18"/>
