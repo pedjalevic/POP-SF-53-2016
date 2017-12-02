@@ -3,7 +3,7 @@
   <Korisnik>
     <Id>1</Id>
     <Obrisan>false</Obrisan>
-    <KorisnickoIme>pera123</KorisnickoIme>
+    <KorisnickoIme>levic</KorisnickoIme>
     <Lozinka>12345</Lozinka>
     <Ime>Petar</Ime>
     <Prezime>Petrovic</Prezime>
@@ -12,7 +12,7 @@
   <Korisnik>
     <Id>2</Id>
     <Obrisan>false</Obrisan>
-    <Korisnicko_Ime>mica123</Korisnicko_Ime>
+    <KorisnickoIme>levic1</KorisnickoIme>
     <Lozinka>12345</Lozinka>
     <Ime>Miroslav</Ime>
     <Prezime>Miric</Prezime>

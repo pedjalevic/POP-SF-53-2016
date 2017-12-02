@@ -145,5 +145,15 @@ namespace POP_SF_53_2016_GUI.Model
             }
             return null;
         }
+        public object Clone()
+        {
+            Akcija kopija = new Akcija();
+            kopija.Id = Id;
+            kopija.PocetakAkcije = PocetakAkcije;
+            kopija.KrajAkcije = KrajAkcije;
+            kopija.NamestajPopust = NamestajPopust;
+            kopija.Popust = Popust;
+            return kopija;
+        }
     }
 }

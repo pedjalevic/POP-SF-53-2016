@@ -1,0 +1,24 @@
+﻿<Window x:Class="POP_SF_53_2016_GUI.UI.NamestajDodavanjeIzmena"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:POP_SF_53_2016_GUI.UI"
+        mc:Ignorable="d"
+        Title="NamestajDodavanjeIzmena" Height="300" Width="450" Background="#4169E1" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid>
+        <Label Content="Naziv:" HorizontalAlignment="Left" Height="28" Margin="80,10,0,0" VerticalAlignment="Top" Width="75" />
+        <Label Content="Sifra:" HorizontalAlignment="Left" Height="27" Margin="80,50,0,0" VerticalAlignment="Top" Width="75" />
+        <Label Content="Cena:" HorizontalAlignment="Left" Margin="80,90,0,0" VerticalAlignment="Top" Width="75" FontSize="14" />
+        <Label Content="Kolicina:" HorizontalAlignment="Left" Height="28" Margin="80,130,0,0" VerticalAlignment="Top" Width="75" />
+        <Label Content="Tip namestaja:" HorizontalAlignment="Left" Height="27" Margin="80,170,0,0" VerticalAlignment="Top" Width="105" />
+        <Button x:Name="btnPotvrdi" Content="Potvrdi" HorizontalAlignment="Left" Height="35" Margin="117,224,0,0" VerticalAlignment="Top" Width="81" IsDefault="True" Click="Potvrdi"/>
+        <Button x:Name="btnOtkazi" Content="Otkazi" HorizontalAlignment="Left" Height="35" Margin="230,224,0,0" VerticalAlignment="Top" Width="81" IsCancel="True"/>
+        <TextBox x:Name="tbNazivNamestaja" Text="{Binding Path=Naziv}" HorizontalAlignment="Left" Height="28" Margin="180,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143"/>
+        <TextBox x:Name="tbSifraNamestaja"  Text="{Binding Path=Sifra}" HorizontalAlignment="Left" Height="27" Margin="180,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143"/>
+        <TextBox x:Name="tbCenaNamestaja"  Text="{Binding Path=Cena}" HorizontalAlignment="Left" Height="26" Margin="180,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143"/>
+        <TextBox x:Name="tbKolicinaNamestaja"  Text="{Binding Path=Kolicina}" HorizontalAlignment="Left" Height="28" Margin="180,130,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143"/>
+        <ComboBox x:Name="cbTipNamestaja" HorizontalAlignment="Left" Height="27" Margin="180,170,0,0" VerticalAlignment="Top" Width="143" SelectedItem="{Binding Path=TipNamestaja}"/>
+
+    </Grid>
+</Window>

@@ -4,8 +4,8 @@
     <Kolicina>0</Kolicina>
     <Sifra>1458</Sifra>
     <Obrisan>true</Obrisan>
-    <TipNamestajaId>0</TipNamestajaId>
-    <Cena>0</Cena>
+    <TipNamestajaId>1</TipNamestajaId>
+    <Cena>1200</Cena>
     <Naziv>Socijalno osvetljenje</Naziv>
     <Id>1</Id>
   </Namestaj>

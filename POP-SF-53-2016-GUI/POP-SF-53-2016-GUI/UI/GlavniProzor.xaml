@@ -14,9 +14,12 @@
         <Button Content="Tipovi Namestaja" Name="btnTipoviNamestaja" HorizontalAlignment="Left" Margin="530,10,0,0" VerticalAlignment="Top" Width="95" Height="30" RenderTransformOrigin="0.147,0" Click="btnTipoviNamestaja_Click"/>
         <Button Content="Korisnici" Name="btnKorisnici" HorizontalAlignment="Left" Margin="650,10,0,0" VerticalAlignment="Top" Width="95" Height="30" Click="btnKorisnici_Click"/>
         <Grid HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="795" Margin="0,421,0,-421" Background="#4169E1">
-            <Button Content="Dodaj" HorizontalAlignment="Left" Margin="20,08,0,0" VerticalAlignment="Top" Width="80" Height="30"/>
-            <Button Content="Izemni" HorizontalAlignment="Left" Margin="115,08,0,0" VerticalAlignment="Top" Width="80" Height="30"/>
-            <Button Content="Obrisi" HorizontalAlignment="Left" Margin="210,08,0,0" VerticalAlignment="Top" Width="80" Height="30"/>
+            <Button Name="btnDodaj" Content="Dodaj" HorizontalAlignment="Left" Margin="20,08,0,0" VerticalAlignment="Top" Width="90" Height="30" Click="btnDodaj_Click"/>
+            <Button Name="btnIzmeni" Content="Izmeni" HorizontalAlignment="Left" Margin="135,08,0,0" VerticalAlignment="Top" Width="90" Height="30" Click="btnIzmeni_Click"/>
+            <Button Name="btnObrisi" Content="Obrisi" HorizontalAlignment="Left" Margin="250,08,0,0" VerticalAlignment="Top" Width="90" Height="30" Click="btnObrisi_Click"/>
+            <TextBox  Name="tbPretraga" HorizontalAlignment="Left" Height="30" Margin="365,08,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" FontSize="14" VerticalContentAlignment="Center"/>
+            <Button Name="btnPretraga" Content="Pretraga" HorizontalAlignment="Left" Margin="510,8,0,0" VerticalAlignment="Top" Width="90" Height="30"/>
+            <Button x:Name="btnIzlistajStavke" Content="Izlistaj stavke" HorizontalAlignment="Left" Height="30" Margin="625,8,0,0" VerticalAlignment="Top" Width="90" Click="Izlistaj" />
         </Grid>
         <DataGrid ColumnWidth="*" SelectionMode="Single" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserReorderColumns="False"  Name="dgPrikaz" HorizontalAlignment="Left" Height="375" Grid.Row="1" Margin="0,49,0,-374" AutoGeneratingColumn="dgPrikaz_AutoGeneratingColumn" VerticalAlignment="Top" Width="797"/>
     </Grid>

@@ -1,0 +1,22 @@
+﻿<Window x:Class="POP_SF_53_2016_GUI.UI.AkcijaDodavanjeIzmena"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:POP_SF_53_2016_GUI.UI"
+        mc:Ignorable="d"
+        Title="AkcijaDodavanjeIzmene" Height="300" Width="450" Background="#4169E1" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid>
+        <Label Content="Pocetak akcije:" HorizontalAlignment="Left" Margin="70,30,0,0" VerticalAlignment="Top" Width="100" />
+        <Label Content="Kraj akcije:" HorizontalAlignment="Left" Margin="70,75,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.508,-0.169" Width="100"/>
+        <Label Content="Namestaj:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="70,120,0,0" Width="100"/>
+        <Label Content="Popust:" HorizontalAlignment="Left" Margin="70,165,0,0" VerticalAlignment="Top" Width="100"/>
+        <ComboBox x:Name="cbNamestaj"  SelectedItem="{Binding Path=NamestajPopust}" HorizontalAlignment="Left" Height="23" Margin="175,120,0,0" VerticalAlignment="Top" Width="130" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="tbPopust" Text="{Binding Path=Popust}" HorizontalAlignment="Left" Height="23" Margin="175,165,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="130" VerticalContentAlignment="Center"/>
+        <DatePicker x:Name="dpPocetak"   SelectedDate="{Binding Path=PocetakAkcije, StringFormat=dd/MM/yyyy}"  HorizontalAlignment="Left" Margin="175,30,0,0" VerticalAlignment="Top" Width="130"/>
+        <DatePicker  x:Name="dpKraj" SelectedDate="{Binding Path=KrajAkcije,StringFormat=dd/MM/yyyy}" HorizontalAlignment="Left" Margin="175,75,0,0" VerticalAlignment="Top" Width="130"/>
+        <Button x:Name="btnPotvrdi" Content="Potvrdi" HorizontalAlignment="Left" Margin="115,214,0,0" VerticalAlignment="Top" Width="85" Height="30" IsDefault="True" Click="Potvrdi"/>
+        <Button x:Name="btnOtkazi" Content="Otkazi" HorizontalAlignment="Left" Margin="240,214,0,0" VerticalAlignment="Top" Width="85" Height="30" IsCancel="True"/>
+
+    </Grid>
+</Window>

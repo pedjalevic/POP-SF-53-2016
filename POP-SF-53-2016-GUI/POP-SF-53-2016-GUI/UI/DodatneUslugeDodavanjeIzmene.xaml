@@ -1,0 +1,18 @@
+﻿<Window x:Class="POP_SF_53_2016_GUI.Data.DodatneUslugeDodavanjeIzmene"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:POP_SF_53_2016_GUI.UI"
+        mc:Ignorable="d"
+        Title="DodatneUslugeDodavanjeIzmene" Height="300" Width="450" Background="#4169E1" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid>
+        <Label Content="Naziv:" HorizontalAlignment="Left" Margin="90,50,0,0" VerticalAlignment="Top" Width="80" />
+        <Label Content="Cena:" HorizontalAlignment="Left" Margin="90,100,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.508,-0.169" Width="80"/>
+        <TextBox x:Name="tbNazivUsluge" Text="{Binding Path=Naziv}" HorizontalAlignment="Left" Height="23" Margin="175,50,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="130" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="tbCenaUsluge" Text="{Binding Path=Cena}" HorizontalAlignment="Left" Height="23" Margin="175,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="130" VerticalContentAlignment="Center"/>
+        <Button Content="Potvrdi" HorizontalAlignment="Left" Margin="115,214,0,0" VerticalAlignment="Top" Width="85" Height="30" IsDefault="True" Click="Potvrdi"/>
+        <Button Content="Otkazi" HorizontalAlignment="Left" Margin="240,214,0,0" VerticalAlignment="Top" Width="85" Height="30" IsCancel="True"/>
+
+    </Grid>
+</Window>

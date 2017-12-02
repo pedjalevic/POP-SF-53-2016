@@ -54,11 +54,40 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\StavkeProdaje.cs" />
+    <Compile Include="UI\DodatneUslugeDodavanjeIzmene.xaml.cs">
+      <DependentUpon>DodatneUslugeDodavanjeIzmene.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model\Projekat.cs" />
+    <Compile Include="UI\AkcijaDodavanjeIzmene.xaml.cs">
+      <DependentUpon>AkcijaDodavanjeIzmene.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\GlavniProzor.xaml.cs">
       <DependentUpon>GlavniProzor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\IzlistajStavke.xaml.cs">
+      <DependentUpon>IzlistajStavke.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\KorisniciDodavanjeIzmena.xaml.cs">
+      <DependentUpon>KorisniciDodavanjeIzmena.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\NamestajDodavanjeIzmena.xaml.cs">
+      <DependentUpon>NamestajDodavanjeIzmena.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ProdajaProzor.xaml.cs">
+      <DependentUpon>ProdajaProzor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\StavkeProzor.xaml.cs">
+      <DependentUpon>StavkeProzor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\TipNamestajaDodavanjeIzmena.xaml.cs">
+      <DependentUpon>TipNamestajaDodavanjeIzmena.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Utils\GenericSerializer.cs" />
+    <Page Include="UI\DodatneUslugeDodavanjeIzmene.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -71,7 +100,35 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UI\AkcijaDodavanjeIzmene.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\GlavniProzor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\IzlistajStavke.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\KorisniciDodavanjeIzmena.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\NamestajDodavanjeIzmena.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ProdajaProzor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\StavkeProzor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\TipNamestajaDodavanjeIzmena.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -110,9 +167,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Image\Salon.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Data\Korisnici.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -129,6 +183,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Data\TipNamestaja.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Data\StavkeProdaje.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
