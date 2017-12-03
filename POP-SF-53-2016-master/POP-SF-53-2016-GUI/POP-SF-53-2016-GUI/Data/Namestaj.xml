@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfNamestaj xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Namestaj>
+    <Kolicina>12</Kolicina>
+    <Sifra>1479</Sifra>
+    <Obrisan>false</Obrisan>
+    <TipNamestajaId>1</TipNamestajaId>
+    <Cena>3200</Cena>
+    <Naziv>Krevet Levic</Naziv>
+    <Id>1</Id>
+  </Namestaj>
+</ArrayOfNamestaj>

@@ -33,7 +33,7 @@ namespace POP_SF_53_2016_GUI.UI
             InitializeComponent();
             this.prodaja = prodaja;
             this.operacija = operacija;
-            dgStavke.DataContext = prodaja.StavkeProdaje;
+            dgStavke.ItemsSource = prodaja.StavkeProdaje;
             tbKupac.DataContext = prodaja;
             dpDatum.DataContext = prodaja;
         }

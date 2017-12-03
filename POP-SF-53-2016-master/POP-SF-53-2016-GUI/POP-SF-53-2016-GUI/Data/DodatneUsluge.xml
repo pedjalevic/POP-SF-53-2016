@@ -1,15 +1,9 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfDodatneUsluge xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <DodatneUsluge>
     <Id>1</Id>
     <Obrisan>false</Obrisan>
-    <Naziv>Montaza</Naziv>
-    <Cena>3500</Cena>
-  </DodatneUsluge>
-  <DodatneUsluge>
-    <Id>2</Id>
-    <Obrisan>true</Obrisan>
     <Naziv>Prevoz</Naziv>
-    <Cena>6000</Cena>
+    <Cena>2000</Cena>
   </DodatneUsluge>
 </ArrayOfDodatneUsluge>

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfKorisnik xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Korisnik>
     <Id>1</Id>
@@ -12,7 +12,7 @@
   <Korisnik>
     <Id>2</Id>
     <Obrisan>false</Obrisan>
-    <KorisnickoIme>levic1</KorisnickoIme>
+    <KorisnickoIme>levic2</KorisnickoIme>
     <Lozinka>12345</Lozinka>
     <Ime>Miroslav</Ime>
     <Prezime>Miric</Prezime>

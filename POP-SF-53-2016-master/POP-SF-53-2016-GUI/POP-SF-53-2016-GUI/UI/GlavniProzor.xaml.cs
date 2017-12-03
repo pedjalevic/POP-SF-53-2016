@@ -38,7 +38,9 @@ namespace POP_SF_53_2016_GUI.UI
         private void btnProdaja_Click(object sender, RoutedEventArgs e)
         {
             TrenutnoAktivno = "Prodaja";
-            dgPrikaz.ItemsSource = Projekat.Instance.Prodaja;
+            view = CollectionViewSource.GetDefaultView(Projekat.Instance.Prodaja);
+            view.Filter = ProdajaIspis;
+            dgPrikaz.ItemsSource = view;
             btnIzmeni.Content = "Storniraj";
             btnObrisi.Visibility = Visibility.Hidden;
             btnIzlistajStavke.Visibility = Visibility.Visible;
@@ -47,7 +49,9 @@ namespace POP_SF_53_2016_GUI.UI
         private void btnAkcije_Click(object sender, RoutedEventArgs e)
         {
             TrenutnoAktivno = "Akcije";
-            dgPrikaz.ItemsSource = Projekat.Instance.Akcije;
+            view = CollectionViewSource.GetDefaultView(Projekat.Instance.Akcije);
+            view.Filter = AkcijaIspis;
+            dgPrikaz.ItemsSource = view;
             btnIzmeni.Content = "Izmeni";
             btnIzlistajStavke.Visibility = Visibility.Hidden;
             btnObrisi.Visibility = Visibility.Visible;
@@ -56,16 +60,21 @@ namespace POP_SF_53_2016_GUI.UI
         private void btnDodatneUsluge_Click(object sender, RoutedEventArgs e)
         {
             TrenutnoAktivno = "DodatneUsluge";
-            dgPrikaz.ItemsSource = Projekat.Instance.DodatneUsluge;
+            view = CollectionViewSource.GetDefaultView(Projekat.Instance.DodatneUsluge);
+            view.Filter = UslugaIspis;
+            dgPrikaz.ItemsSource = view;
             btnIzmeni.Content = "Izmeni";
             btnIzlistajStavke.Visibility = Visibility.Hidden;
             btnObrisi.Visibility = Visibility.Visible;
+
         }
 
         private void btnNamestaj_Click(object sender, RoutedEventArgs e)
         {
-            TrenutnoAktivno = "DodatneUsluge";
-            dgPrikaz.ItemsSource = Projekat.Instance.DodatneUsluge;
+            TrenutnoAktivno = "Namestaj";
+            view = CollectionViewSource.GetDefaultView(Projekat.Instance.Namestaj);
+            view.Filter = NamestajIspis;
+            dgPrikaz.ItemsSource = view;
             btnIzmeni.Content = "Izmeni";
             btnIzlistajStavke.Visibility = Visibility.Hidden;
             btnObrisi.Visibility = Visibility.Visible;
@@ -75,7 +84,9 @@ namespace POP_SF_53_2016_GUI.UI
         private void btnTipoviNamestaja_Click(object sender, RoutedEventArgs e)
         {
             TrenutnoAktivno = "TipoviNamestaja";
-            dgPrikaz.ItemsSource = Projekat.Instance.TipNamestaja;
+            view = CollectionViewSource.GetDefaultView(Projekat.Instance.TipNamestaja);
+            view.Filter = TipNamestajaIspis;
+            dgPrikaz.ItemsSource = view;
             btnIzmeni.Content = "Izmeni";
             btnIzlistajStavke.Visibility = Visibility.Hidden;
             btnObrisi.Visibility = Visibility.Visible;
@@ -84,7 +95,9 @@ namespace POP_SF_53_2016_GUI.UI
         private void btnKorisnici_Click(object sender, RoutedEventArgs e)
         {
             TrenutnoAktivno = "Korisnici";
-            dgPrikaz.ItemsSource = Projekat.Instance.Korisnici;
+            view = CollectionViewSource.GetDefaultView(Projekat.Instance.Korisnici);
+            view.Filter = KorisnikIspis;
+            dgPrikaz.ItemsSource = view;
             btnIzmeni.Content = "Izmeni";
             btnIzlistajStavke.Visibility = Visibility.Hidden;
             btnObrisi.Visibility = Visibility.Visible;
@@ -105,10 +118,31 @@ namespace POP_SF_53_2016_GUI.UI
 
 
         }
+
         public bool NamestajIspis(object obj)
         {
             return ((Namestaj)obj).Obrisan == false;
-        }        
+        }
+        public bool TipNamestajaIspis(object obj)
+        {
+            return ((TipNamestaja)obj).Obrisan == false;
+        }
+        public bool UslugaIspis(object obj)
+        {
+            return ((DodatneUsluge)obj).Obrisan == false;
+        }
+        public bool ProdajaIspis(object obj)
+        {
+            return ((ProdajaNamestaja)obj).Obrisan == false;
+        }
+        public bool AkcijaIspis(object obj)
+        {
+            return ((Akcija)obj).Obrisan == false;
+        }
+        public bool KorisnikIspis(object obj)
+        {
+            return ((Korisnik)obj).Obrisan == false;
+        }
         private void dgPrikaz_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
             if ((string)e.Column.Header == "Id" || (string)e.Column.Header == "Obrisan" || (string)e.Column.Header == "NamestajProdajaId" || (string)e.Column.Header == "DodatneUslugaId"
@@ -245,6 +279,7 @@ namespace POP_SF_53_2016_GUI.UI
                     if (MessageBox.Show("Da li ste sigurni?", "Potvrda", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                         namestajBrisanje.Obrisan = true;
                     GenericSerializer.Serialize("Namestaj.xml", list);
+                    view.Refresh();
                     break;
                 case "TipoviNamestaja":
                     var lista = Projekat.Instance.TipNamestaja;
@@ -252,6 +287,7 @@ namespace POP_SF_53_2016_GUI.UI
                     if (MessageBox.Show("Da li ste sigurni?", "Potvrda", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                         tip.Obrisan = true;
                     GenericSerializer.Serialize("TipNamestaja.xml", lista);
+                    view.Refresh();
                     break;
                 case "DodatneUsluge":
                     var listaUsluga = Projekat.Instance.DodatneUsluge;
@@ -259,6 +295,7 @@ namespace POP_SF_53_2016_GUI.UI
                     if (MessageBox.Show("Da li ste sigurni?", "Potvrda", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                         uslugaBrisanje.Obrisan = true;
                     GenericSerializer.Serialize("DodatneUsluge.xml", listaUsluga);
+                    view.Refresh();
                     break;
                 case "Korisnici":
                     var listaKorisnika = Projekat.Instance.Korisnici;
@@ -266,6 +303,7 @@ namespace POP_SF_53_2016_GUI.UI
                     if (MessageBox.Show("Da li ste sigurni?", "Potvrda", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                         korisnikBrisanje.Obrisan = true;
                     GenericSerializer.Serialize("Korisnici.xml", listaKorisnika);
+                    view.Refresh();
                     break;
                 case "Akcije":
                     var listaAkcija = Projekat.Instance.Akcije;
@@ -273,6 +311,7 @@ namespace POP_SF_53_2016_GUI.UI
                     if (MessageBox.Show("Da li ste sigurni?", "Potvrda", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                         akcijaBrisanje.Obrisan = true;
                     GenericSerializer.Serialize("Akcije.xml", listaAkcija);
+                    view.Refresh();
                     break;
                 case "Prodaja":
                     var listaProdaja = Projekat.Instance.Prodaja;
@@ -280,6 +319,7 @@ namespace POP_SF_53_2016_GUI.UI
                     if (MessageBox.Show("Da li ste sigurni?", "Potvrda", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                         prodajaBrisanje.Obrisan = true;
                     GenericSerializer.Serialize("ProdajaNamestaja.xml", listaProdaja);
+                    view.Refresh();
                     break;
                 default:
                     break;

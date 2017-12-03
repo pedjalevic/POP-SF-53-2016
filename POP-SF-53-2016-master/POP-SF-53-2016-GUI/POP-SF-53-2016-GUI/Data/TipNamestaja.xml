@@ -1,13 +1,8 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfTipNamestaja xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <TipNamestaja>
     <Obrisan>false</Obrisan>
-    <Naziv>Ormani</Naziv>
+    <Naziv>Kreveti</Naziv>
     <Id>1</Id>
-  </TipNamestaja>
-  <TipNamestaja>
-    <Obrisan>false</Obrisan>
-    <Naziv>Komode</Naziv>
-    <Id>2</Id>
   </TipNamestaja>
 </ArrayOfTipNamestaja>

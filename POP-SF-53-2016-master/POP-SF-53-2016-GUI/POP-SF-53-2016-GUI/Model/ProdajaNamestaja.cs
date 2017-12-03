@@ -114,12 +114,6 @@ namespace POP_SF_53_2016_GUI.Model
             set
             {
                 ukupanIznos = value;
-                //  if(stavkeProdaje!=null)
-                // for (int i = 0; i < stavkeProdaje.Count; i++)
-                //     ukupanIznos += stavkeProdaje[i].Cena;
-                // else
-                //    ukupanIznos = 0;
-
                 OnPropertyChanged("UkupanIznos");
 
             }
@@ -143,16 +137,6 @@ namespace POP_SF_53_2016_GUI.Model
             if (!Obrisan)
             {
                 var ispis = $"{Id}. {DatumProdaje} {BrojRacuna} {Kupac} ";
-                //for (int i = 0; i < stavkeProdaje.Count; i++)
-                //  {
-                //      ispis += stavkeProdaje[i].NamestajProdaja.Naziv + " ,";
-
-                //  }
-                //            for (int i = 0; i < stavkeProdaje.Count; i++)
-                //   {
-                //     ispis += stavkeProdaje[i].DodatneUsluga.Naziv + " ,";
-
-                //  }
                 return ispis;
             }
             return null;

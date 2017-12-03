@@ -9,7 +9,7 @@
     <Grid>
         <Button x:Name="btnPotvrdi" Content="Potvrdi" HorizontalAlignment="Left" Height="40" Margin="211,537,0,0" VerticalAlignment="Top" Width="130" IsDefault="True" Click="Potvrdi"/>
         <Button x:Name="btnOtkazi" Content="Otkazi" HorizontalAlignment="Left" Height="40" Margin="381,537,0,0" VerticalAlignment="Top" Width="130" IsCancel="True"/>
-        <DataGrid x:Name="dgStavke" ItemsSource="{Binding Source=StavkeProdaje}" AutoGenerateColumns="False"  CanUserResizeColumns="False" CanUserAddRows="False" ColumnWidth="*" SelectionMode="Single"  HorizontalAlignment="Left" Height="218" Margin="52,208,0,0" VerticalAlignment="Top" Width="544" AutoGeneratingColumn="dgStavke_AutoGeneratingColumn"/>
+        <DataGrid x:Name="dgStavke" ItemsSource="{Binding Source=StavkeProdaje}" AutoGenerateColumns="True"  CanUserResizeColumns="False" CanUserAddRows="False" ColumnWidth="*" SelectionMode="Single"  HorizontalAlignment="Left" Height="218" Margin="52,208,0,0" VerticalAlignment="Top" Width="544" AutoGeneratingColumn="dgStavke_AutoGeneratingColumn"/>
         <Button x:Name="btnPreuzmi" Content="Dodaj" HorizontalAlignment="Left" Height="35" Margin="601,229,0,0" VerticalAlignment="Top" Width="112" Click="DodajStavku"/>
         <Label Content="Kupac:"  HorizontalAlignment="Left" Height="31" Margin="199,24,0,0" VerticalAlignment="Top" Width="100" FontSize="16" />
         <TextBox x:Name="tbKupac" Text="{Binding Path=Kupac}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="29" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" Margin="302,24,0,0"/>

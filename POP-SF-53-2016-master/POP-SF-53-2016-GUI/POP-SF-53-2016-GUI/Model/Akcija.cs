@@ -71,11 +71,9 @@ namespace POP_SF_53_2016_GUI.Model
             }
         }
 
-        private List<int> namestajPopustId;
+        private int namestajPopustId;
 
-
-
-        public List<int> NamestajPopustId
+        public int NamestajPopustId
         {
             get { return namestajPopustId; }
             set
@@ -84,25 +82,29 @@ namespace POP_SF_53_2016_GUI.Model
                 OnPropertyChanged("NamestajPopustId");
             }
         }
-        private ObservableCollection<Namestaj> namestajPopust;
+        private Namestaj namestajPopust;
         [XmlIgnore]
-        public ObservableCollection<Namestaj> NamestajPopust
+        public Namestaj NamestajPopust
         {
             get
             {
                 if (namestajPopust == null)
                 {
-                    for (int i = 0; i < namestajPopustId.Count; id++)
-                        namestajPopust.Add(Namestaj.PronadjiNamestaj(namestajPopustId[i]));
+                    namestajPopust = Namestaj.PronadjiNamestaj(NamestajPopustId);
                 }
                 return namestajPopust;
             }
             set
             {
                 namestajPopust = value;
-                for (int i = 0; i < namestajPopust.Count; i++)
-                    namestajPopustId.Add(namestajPopust[i].Id);
+                NamestajPopustId = namestajPopust.Id;
+                OnPropertyChanged("NamestajPopust");
             }
+        }
+        public Akcija()
+        {
+            pocetakAkcije = DateTime.Now;
+            krajAkcije = DateTime.Now;
         }
 
 
@@ -114,13 +116,7 @@ namespace POP_SF_53_2016_GUI.Model
             {
 
 
-                string ispis = $"{Id}. {PocetakAkcije} {KrajAkcije} {Popust} ";
-
-                for (int i = 0; i < namestajPopust.Count; i++)
-                {
-                    ispis += namestajPopust[i].Naziv + " ,";
-
-                }
+                string ispis = $"{Id}. {PocetakAkcije} {KrajAkcije} {Popust} {namestajPopust.Naziv}";
                 return ispis;
             }
             return null;
