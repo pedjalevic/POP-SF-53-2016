@@ -11,8 +11,6 @@
         <Label Content="Izaberite namestaj:" HorizontalAlignment="Left" Height="31" Margin="60,155,0,0" VerticalAlignment="Top" Width="147" FontSize="16" />
         <Label Content="Kolicina:" HorizontalAlignment="Left" Height="28" Margin="130,57,0,0" VerticalAlignment="Top" Width="77" FontSize="16"/>
         <TextBox x:Name="tbKolicina" VerticalContentAlignment="Center" Text="{Binding Path=Kolicina}" HorizontalAlignment="Left" Height="28" Margin="213,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="149"/>
-        <Label Content="Usluga:" HorizontalAlignment="Left" Height="32" Margin="130,104,0,0" VerticalAlignment="Top" Width="77" FontSize="16"/>
-        <ComboBox x:Name="cbUsluga" SelectedItem="{Binding Path=DodatneUsluge}" HorizontalAlignment="Left" Height="22" Margin="213,114,0,0" VerticalAlignment="Top" Width="149" RenderTransformOrigin="0.362,1.273"/>
         <Button x:Name="btnPotvrdi" Content="Potvrdi" HorizontalAlignment="Left" Height="34" Margin="173,380,0,0" VerticalAlignment="Top" Width="117" IsDefault="True" Click="PotvrdiUslugu"/>
         <Button Content="Otkazi" HorizontalAlignment="Left" Height="34" Margin="319,380,0,0" VerticalAlignment="Top" Width="118" IsCancel="True"/>
 

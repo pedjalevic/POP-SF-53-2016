@@ -1,4 +1,5 @@
-﻿using POP_SF_53_2016_GUI.Model;
+﻿using POP_SF_53_2016_GUI.DAO;
+using POP_SF_53_2016_GUI.Model;
 using POP_SF_53_2016_GUI.Utils;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,7 @@ namespace POP_SF_53_2016_GUI.Data
             DODAVANJE,
             IZMENA
         };
-        private DodatneUsluge dodatneUsluge;
+        public DodatneUsluge dodatneUsluge;
         private Operacija operacija;
         public DodatneUslugeDodavanjeIzmene(DodatneUsluge dodatneUsluge, Operacija operacija)
         {
@@ -40,17 +41,14 @@ namespace POP_SF_53_2016_GUI.Data
         private void Potvrdi(object sender, RoutedEventArgs e)
         {
         this.DialogResult = true;
-        var lista = Projekat.Instance.DodatneUsluge;
 
         if (operacija == Operacija.DODAVANJE)
         {
-            dodatneUsluge.Id = lista.Count + 1;
-            lista.Add(dodatneUsluge);
-        }
+                UslugeDAO.DodavanjeUsluge(dodatneUsluge);
+            }
 
-
-        GenericSerializer.Serialize("DodatneUsluge.xml", lista);
-        Close();
+            UslugeDAO.IzmenaUsluge(dodatneUsluge);
+            Close();
     }
     }
 }

@@ -31,18 +31,6 @@ namespace POP_SF_53_2016_GUI.Model
             set { kolicina = value; }
         }
 
-        private int namestajProdajaId;
-
-        public int NamestajProdajaId
-
-        {
-            get { return namestajProdajaId; }
-            set
-            {
-                namestajProdajaId = value;
-                OnPropertyChanged("NamestajProdajaId");
-            }
-        }
         private Namestaj namestajProdaja;
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -52,57 +40,17 @@ namespace POP_SF_53_2016_GUI.Model
         {
             get
             {
-
-                if (namestajProdaja == null)
-                {
-
-                    namestajProdaja = Namestaj.PronadjiNamestaj(namestajProdajaId);
-                }
                 return namestajProdaja;
             }
             set
             {
                 namestajProdaja = value;
-                namestajProdajaId = namestajProdaja.Id;
                 OnPropertyChanged("NamestajProdaja");
             }
 
         }
 
-        private int dodatnaUslugaId;
 
-        public int DodatnaUslugaId
-
-        {
-            get { return dodatnaUslugaId; }
-            set
-            {
-                dodatnaUslugaId = value;
-                OnPropertyChanged("DodatneUslugaId");
-            }
-        }
-
-        private DodatneUsluge dodatneUsluge;
-        [XmlIgnore]
-        public DodatneUsluge DodatneUsluge
-        {
-            get
-            {
-                if (dodatneUsluge == null)
-                {
-
-                    dodatneUsluge = DodatneUsluge.PronadjiUslugu(DodatnaUslugaId);
-                }
-                return dodatneUsluge;
-            }
-            set
-            {
-                dodatneUsluge = value;
-
-                dodatnaUslugaId = dodatneUsluge.Id;
-                OnPropertyChanged("DodatneUsluge");
-            }
-        }
         private bool obrisan;
 
         public bool Obrisan
@@ -146,33 +94,6 @@ namespace POP_SF_53_2016_GUI.Model
                     return stavka;
                 }
 
-            }
-            return null;
-        }
-        public static ObservableCollection<StavkaProdaje> PronadjiStavke(List<int> id)
-        {
-            ObservableCollection<StavkaProdaje> stavke = new ObservableCollection<StavkaProdaje>();
-            if (id != null)
-            {
-                for (int i = 0; i < id.Count; i++)
-                {
-
-                    stavke.Add(PronadjiStavku(id[i]));
-                }
-                return stavke;
-            }
-            return null;
-        }
-        public static List<int> PronadjiIdove(ObservableCollection<StavkaProdaje> stavke)
-        {
-            var lista = new List<int>();
-            if (stavke != null)
-            {
-                for (int i = 0; i < stavke.Count; i++)
-                {
-                    lista.Add(stavke[i].Id);
-                }
-                return lista;
             }
             return null;
         }

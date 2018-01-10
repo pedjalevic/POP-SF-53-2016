@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace POP_SF_53_2016_GUI.Model
 {
-     public class Akcija : INotifyPropertyChanged
+     public class Akcija : INotifyPropertyChanged, ICloneable
     {
         private int id;
 
@@ -82,22 +82,17 @@ namespace POP_SF_53_2016_GUI.Model
                 OnPropertyChanged("NamestajPopustId");
             }
         }
-        private Namestaj namestajPopust;
+        private ObservableCollection<Namestaj> namestajPopust;
         [XmlIgnore]
-        public Namestaj NamestajPopust
+        public ObservableCollection<Namestaj> NamestajPopust
         {
             get
             {
-                if (namestajPopust == null)
-                {
-                    namestajPopust = Namestaj.PronadjiNamestaj(NamestajPopustId);
-                }
                 return namestajPopust;
             }
             set
             {
                 namestajPopust = value;
-                NamestajPopustId = namestajPopust.Id;
                 OnPropertyChanged("NamestajPopust");
             }
         }
@@ -105,6 +100,7 @@ namespace POP_SF_53_2016_GUI.Model
         {
             pocetakAkcije = DateTime.Now;
             krajAkcije = DateTime.Now;
+            namestajPopust = new ObservableCollection<Namestaj>();
         }
 
 
@@ -116,7 +112,7 @@ namespace POP_SF_53_2016_GUI.Model
             {
 
 
-                string ispis = $"{Id}. {PocetakAkcije} {KrajAkcije} {Popust} {namestajPopust.Naziv}";
+                string ispis = $"{Id}. {PocetakAkcije} {KrajAkcije} {Popust} ";
                 return ispis;
             }
             return null;

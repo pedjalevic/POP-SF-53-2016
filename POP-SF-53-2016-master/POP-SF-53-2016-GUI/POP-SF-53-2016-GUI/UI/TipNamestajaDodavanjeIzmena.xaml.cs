@@ -1,4 +1,5 @@
-﻿using POP_SF_53_2016_GUI.Model;
+﻿using POP_SF_53_2016_GUI.DAO;
+using POP_SF_53_2016_GUI.Model;
 using POP_SF_53_2016_GUI.Utils;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,7 @@ namespace POP_SF_53_2016_GUI.UI
             DODAVANJE,
             IZMENA
         };
-        private TipNamestaja tipNamestaja;
+        public TipNamestaja tipNamestaja;
         private Operacija operacija;
         public TipNamestajaDodavanjeIzmena(TipNamestaja tipNamestaja, Operacija operacija)
         {
@@ -39,15 +40,13 @@ namespace POP_SF_53_2016_GUI.UI
         private void Potvrdi(object sender, RoutedEventArgs e)
         {
             this.DialogResult = true;
-            var lista = Projekat.Instance.TipNamestaja;
 
             if (operacija == Operacija.DODAVANJE)
             {
 
-                tipNamestaja.Id = lista.Count + 1;
-                lista.Add(tipNamestaja);
+                TipNamestajaDAO.DodavanjeTipa(tipNamestaja);
             }
-            GenericSerializer.Serialize("TipNamestaja.xml", lista);
+            TipNamestajaDAO.IzmenaTipa(tipNamestaja);
             Close();
         }
     }

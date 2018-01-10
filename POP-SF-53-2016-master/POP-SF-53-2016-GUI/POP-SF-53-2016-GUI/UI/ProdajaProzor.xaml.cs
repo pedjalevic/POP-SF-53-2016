@@ -1,4 +1,5 @@
-﻿using POP_SF_53_2016_GUI.Model;
+﻿using POP_SF_53_2016_GUI.DAO;
+using POP_SF_53_2016_GUI.Model;
 using POP_SF_53_2016_GUI.Utils;
 using System;
 using System.Collections.Generic;
@@ -34,6 +35,7 @@ namespace POP_SF_53_2016_GUI.UI
             this.prodaja = prodaja;
             this.operacija = operacija;
             dgStavke.ItemsSource = prodaja.StavkeProdaje;
+            dgUsluge.ItemsSource = prodaja.DodatneUsluge;
             tbKupac.DataContext = prodaja;
             dpDatum.DataContext = prodaja;
         }
@@ -43,29 +45,30 @@ namespace POP_SF_53_2016_GUI.UI
             StavkaProdaje stavka = new StavkaProdaje();
             StavkeProzor st = new StavkeProzor(stavka, StavkeProzor.Operacija.DODAVANJE);
             if (st.ShowDialog() == true)
-                prodaja.StavkeProdaje.Add(st.Stavka);
+            {
+                prodaja = ProdajaDAO.DodajStavku(prodaja, st.Stavka);
+            }
         }
 
         private void Potvrdi(object sender, RoutedEventArgs e)
         {
             Random rn = new Random();
             this.DialogResult = true;
-            var lista = Projekat.Instance.Prodaja;
+            prodaja.UkupanIznos = prodaja.StavkeProdaje.Sum(item => item.Cena) + prodaja.DodatneUsluge.Sum(item => item.Cena);
             if (operacija == Operacija.DODAVANJE)
             {
-                prodaja.Id = lista.Count + 1;
                 prodaja.BrojRacuna = rn.Next(100, 10000);
-                prodaja.UkupanIznos = prodaja.StavkeProdaje.Sum(item => item.Cena);
-                lista.Add(prodaja);
+                ProdajaDAO.DodajProdaju(prodaja);
             }
-            GenericSerializer.Serialize("ProdajaNamestaja.xml", lista);
+            ProdajaDAO.IzmenaProdaje(prodaja);
+
             this.Close();
         }
 
         private void dgStavke_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            if ((string)e.Column.Header == "DodatnaUslugaId" || (string)e.Column.Header == "NamestajProdajaId" || (string)e.Column.Header == "Id"
-                || (string)e.Column.Header == "Obrisan")
+            if ((string)e.Column.Header == "NamestajProdajaId" || (string)e.Column.Header == "Id"
+                           || (string)e.Column.Header == "Obrisan")
             {
                 e.Cancel = true;
             }
@@ -74,8 +77,32 @@ namespace POP_SF_53_2016_GUI.UI
         private void UkloniStavku(object sender, RoutedEventArgs e)
         {
             StavkaProdaje izabrana = dgStavke.SelectedItem as StavkaProdaje;
-            prodaja.StavkeProdaje.Remove(izabrana);
+            prodaja = ProdajaDAO.ObrisiStavku(prodaja, izabrana);
 
+        }
+
+        private void btnDodajU_Click(object sender, RoutedEventArgs e)
+        {
+            PreuzmiUslugu pu = new PreuzmiUslugu();
+            if (pu.ShowDialog() == true)
+            {
+
+                prodaja = ProdajaDAO.DodajUslugu(prodaja, pu.Usluge);
+
+            }
+        }
+
+        private void btnObisiU_Click(object sender, RoutedEventArgs e)
+        {
+            var izabrana = dgUsluge.SelectedItem as DodatneUsluge;
+            prodaja.DodatneUsluge.Remove(izabrana);
+            prodaja = ProdajaDAO.ObrisiUslugu(prodaja, izabrana);
+        }
+
+        private void dgUsluge_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            if ((string)e.Column.Header == "Id" || (string)e.Column.Header == "Obrisan")
+                e.Cancel = true;
         }
     }
 }

@@ -14,7 +14,6 @@ namespace POP_SF_53_2016_GUI.Model
         private int id;
         private string naziv;
         private double cena;
-        private int tipNamestajaId;
         private bool obrisan;
         private string sifra;
         private int kolicina;
@@ -24,17 +23,11 @@ namespace POP_SF_53_2016_GUI.Model
         {
             get
             {
-                if (tipNamestaja == null)
-                {
-                    tipNamestaja = TipNamestaja.PronadjiTip(TipNamestajaId);
-                }
                 return tipNamestaja;
-
             }
             set
             {
                 tipNamestaja = value;
-                TipNamestajaId = tipNamestaja.Id;
                 OnPropertyChanged("TipNamestaja");
             }
         }
@@ -71,18 +64,6 @@ namespace POP_SF_53_2016_GUI.Model
                 OnPropertyChanged("Obrisan");
             }
         }
-
-
-        public int TipNamestajaId
-        {
-            get { return tipNamestajaId; }
-            set
-            {
-                tipNamestajaId = value;
-                OnPropertyChanged("TipNamestajaId");
-            }
-        }
-
 
         public double Cena
         {
@@ -128,7 +109,7 @@ namespace POP_SF_53_2016_GUI.Model
             if (!Obrisan)
             {
                 string ispis = "";
-                return ispis += $"{Naziv},{Cena},{TipNamestaja.PronadjiTip(TipNamestajaId).Naziv}";
+                return ispis += $"{Naziv}";
             }
             return null;
 

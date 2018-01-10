@@ -1,4 +1,5 @@
-﻿using POP_SF_53_2016_GUI.Model;
+﻿using POP_SF_53_2016_GUI.DAO;
+using POP_SF_53_2016_GUI.Model;
 using POP_SF_53_2016_GUI.Utils;
 using System;
 using System.Collections.Generic;
@@ -26,35 +27,33 @@ namespace POP_SF_53_2016_GUI.UI
             DODAVANJE,
             IZMENA
         };
-        private Namestaj namestaj;
+        public Namestaj namestaj;
         private Operacija operacija;
         public NamestajDodavanjeIzmena(Namestaj namestaj, Operacija operacija)
         {
             InitializeComponent();
             this.namestaj = namestaj;
             this.operacija = operacija;
+            cbTipNamestaja.ItemsSource = Projekat.Instance.TipNamestaja;
             tbNazivNamestaja.DataContext = namestaj;
             tbCenaNamestaja.DataContext = namestaj;
             tbSifraNamestaja.DataContext = namestaj;
             tbKolicinaNamestaja.DataContext = namestaj;
-            cbTipNamestaja.ItemsSource = Projekat.Instance.TipNamestaja;
             cbTipNamestaja.DataContext = namestaj;
         }
 
         private void Potvrdi(object sender, RoutedEventArgs e)
         {
             this.DialogResult = true;
-            var lista = Projekat.Instance.Namestaj;
             var izabraniTip = (TipNamestaja)cbTipNamestaja.SelectedItem;
 
 
             if (operacija == Operacija.DODAVANJE)
             {
-                namestaj.Id = lista.Count + 1;
-                lista.Add(namestaj);
+                NamestajDAO.DodavanjeNamestaja(namestaj);
             }
 
-            GenericSerializer.Serialize("Namestaj.xml", lista);
+            NamestajDAO.IzmenaNamestaja(namestaj);
             Close();
         }
     }

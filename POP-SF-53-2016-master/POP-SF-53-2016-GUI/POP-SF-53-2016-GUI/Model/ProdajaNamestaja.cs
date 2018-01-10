@@ -6,15 +6,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using POP_SF_53_2016_GUI.Model;
 
 namespace POP_SF_53_2016_GUI.Model
 {
-    public class ProdajaNamestaja : INotifyPropertyChanged
+    public class ProdajaNamestaja : INotifyPropertyChanged, ICloneable
     {
         public ProdajaNamestaja()
         {
             datumProdaje = DateTime.Today;
             stavkeProdaje = new ObservableCollection<StavkaProdaje>();
+            dodatneUsluge = new ObservableCollection<DodatneUsluge>();
         }
         private int id;
 
@@ -28,21 +30,6 @@ namespace POP_SF_53_2016_GUI.Model
                 OnPropertyChanged("Id");
             }
         }
-        private List<int> stavkaProdajeId;
-
-        public List<int> StavkaProdajeId
-
-        {
-            get
-            {
-                return stavkaProdajeId;
-            }
-            set
-            {
-                stavkaProdajeId = value;
-                OnPropertyChanged("StavkaProdajeId");
-            }
-        }
 
         private ObservableCollection<StavkaProdaje> stavkeProdaje;
         [XmlIgnore]
@@ -50,15 +37,12 @@ namespace POP_SF_53_2016_GUI.Model
         {
             get
             {
-                if (stavkeProdaje == null)
-                    stavkeProdaje = StavkaProdaje.PronadjiStavke(stavkaProdajeId);
+
                 return stavkeProdaje;
             }
             set
             {
                 stavkeProdaje = value;
-                if (stavkeProdaje != null)
-                    stavkaProdajeId = StavkaProdaje.PronadjiIdove(stavkeProdaje);
                 OnPropertyChanged("StavkeProdaje");
             }
         }
@@ -114,6 +98,8 @@ namespace POP_SF_53_2016_GUI.Model
             set
             {
                 ukupanIznos = value;
+
+
                 OnPropertyChanged("UkupanIznos");
 
             }
@@ -131,12 +117,28 @@ namespace POP_SF_53_2016_GUI.Model
             }
         }
 
+        private ObservableCollection<DodatneUsluge> dodatneUsluge;
+        [XmlIgnore]
+        public ObservableCollection<DodatneUsluge> DodatneUsluge
+        {
+            get
+            {
+
+                return dodatneUsluge;
+            }
+            set
+            {
+                dodatneUsluge = value;
+                OnPropertyChanged("DodatneUsluge");
+            }
+        }
 
         public override string ToString()
         {
             if (!Obrisan)
             {
                 var ispis = $"{Id}. {DatumProdaje} {BrojRacuna} {Kupac} ";
+
                 return ispis;
             }
             return null;
@@ -168,9 +170,11 @@ namespace POP_SF_53_2016_GUI.Model
             ProdajaNamestaja kopija = new ProdajaNamestaja();
             kopija.Id = id;
             kopija.Kupac = kupac;
+            kopija.DatumProdaje = DatumProdaje;
             kopija.UkupanIznos = ukupanIznos;
             kopija.BrojRacuna = brojRacuna;
             kopija.StavkeProdaje = stavkeProdaje;
+            kopija.DodatneUsluge = DodatneUsluge;
             return kopija;
         }
     }

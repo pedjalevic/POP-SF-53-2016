@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -64,7 +65,7 @@ namespace POP_SF_53_2016_GUI.Model
         {
             if (!Obrisan)
             {
-                return $"{Id} {Naziv} {Cena}";
+                return $"{Naziv}";
             }
             return null;
         }
@@ -77,6 +78,33 @@ namespace POP_SF_53_2016_GUI.Model
                     return usluga;
                 }
 
+            }
+            return null;
+        }
+        public static ObservableCollection<DodatneUsluge> PronadjiUsluge(List<int> id)
+        {
+            ObservableCollection<DodatneUsluge> lista = new ObservableCollection<DodatneUsluge>();
+            if (id != null)
+            {
+                for (int i = 0; i < id.Count; i++)
+                {
+
+                    lista.Add(PronadjiUslugu(id[i]));
+                }
+                return lista;
+            }
+            return null;
+        }
+        public static List<int> PronadjiIdove(ObservableCollection<DodatneUsluge> stavke)
+        {
+            var lista = new List<int>();
+            if (stavke != null)
+            {
+                for (int i = 0; i < stavke.Count; i++)
+                {
+                    lista.Add(stavke[i].Id);
+                }
+                return lista;
             }
             return null;
         }

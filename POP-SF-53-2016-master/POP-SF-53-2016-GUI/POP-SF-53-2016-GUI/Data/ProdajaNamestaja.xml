@@ -1,3 +1,10 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfProdajaNamestaja xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ProdajaNamestaja>
+    <Id>1</Id>
+    <DatumProdaje>2017-12-07T00:00:00+01:00</DatumProdaje>
+    <BrojRacuna>4772</BrojRacuna>
+    <UkupanIznos>0</UkupanIznos>
+    <Obrisan>false</Obrisan>
+  </ProdajaNamestaja>
 </ArrayOfProdajaNamestaja>

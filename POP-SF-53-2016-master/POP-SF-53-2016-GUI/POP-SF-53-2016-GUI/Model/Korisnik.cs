@@ -132,6 +132,7 @@ namespace POP_SF_53_2016_GUI.Model
         public object Clone()
         {
             Korisnik kopija = new Korisnik();
+            kopija.Id = Id;
             kopija.Ime = Ime;
             kopija.Prezime = Prezime;
             kopija.KorisnickoIme = KorisnickoIme;

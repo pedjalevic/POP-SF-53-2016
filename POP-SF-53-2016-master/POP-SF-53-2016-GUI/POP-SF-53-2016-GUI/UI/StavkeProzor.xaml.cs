@@ -34,24 +34,8 @@ namespace POP_SF_53_2016_GUI.UI
             Stavka = stavka;
             this.operacija = operacija;
             dgNamestaj.ItemsSource = NamestajPrikaz();
-            dgNamestaj.IsSynchronizedWithCurrentItem = true;
             dgNamestaj.SelectedIndex = 0;
-            cbUsluga.ItemsSource = UslugePrikaz();
-            cbUsluga.DataContext = Stavka;
             tbKolicina.DataContext = Stavka;
-        }
-        public List<DodatneUsluge> UslugePrikaz()
-        {
-            var usluge = Projekat.Instance.DodatneUsluge;
-            List<DodatneUsluge> zaPrikaz = new List<DodatneUsluge>();
-            foreach (var usluga in usluge)
-            {
-                if (usluga.Obrisan == false)
-                    zaPrikaz.Add(usluga);
-
-
-            }
-            return zaPrikaz;
         }
         public List<Namestaj> NamestajPrikaz()
         {
@@ -74,11 +58,11 @@ namespace POP_SF_53_2016_GUI.UI
             {
                 Stavka.Id = lista.Count + 1;
                 Stavka.NamestajProdaja = dgNamestaj.SelectedItem as Namestaj;
-                Stavka.Cena = Stavka.DodatneUsluge.Cena + Stavka.NamestajProdaja.Cena * Stavka.Kolicina;
+                Stavka.Cena = (Stavka.NamestajProdaja.Cena) * Stavka.Kolicina;
                 lista.Add(Stavka);
 
             }
-            GenericSerializer.Serialize("stavka_prodaje.xml", lista);
+            GenericSerializer.Serialize("StavkeProdaje.xml", lista);
             this.Close();
         }
 

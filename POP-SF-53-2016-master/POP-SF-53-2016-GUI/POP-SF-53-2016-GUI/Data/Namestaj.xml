@@ -9,4 +9,13 @@
     <Naziv>Krevet Levic</Naziv>
     <Id>1</Id>
   </Namestaj>
+  <Namestaj>
+    <Kolicina>800</Kolicina>
+    <Sifra>8984</Sifra>
+    <Obrisan>false</Obrisan>
+    <TipNamestajaId>2</TipNamestajaId>
+    <Cena>87775857887587</Cena>
+    <Naziv>stolica</Naziv>
+    <Id>2</Id>
+  </Namestaj>
 </ArrayOfNamestaj>

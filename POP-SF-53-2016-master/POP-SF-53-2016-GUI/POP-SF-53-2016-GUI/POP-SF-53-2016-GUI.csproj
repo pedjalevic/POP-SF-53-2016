@@ -35,6 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -54,6 +55,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DAO\AkcijaDAO.cs" />
+    <Compile Include="DAO\KorisnikDAO.cs" />
+    <Compile Include="DAO\NamestajDAO.cs" />
+    <Compile Include="DAO\ProdajaDAO.cs" />
+    <Compile Include="DAO\TipNamestajaDAO.cs" />
+    <Compile Include="DAO\UslugeDAO.cs" />
     <Compile Include="Model\StavkeProdaje.cs" />
     <Compile Include="UI\DodatneUslugeDodavanjeIzmene.xaml.cs">
       <DependentUpon>DodatneUslugeDodavanjeIzmene.xaml</DependentUpon>
@@ -73,6 +80,12 @@
     </Compile>
     <Compile Include="UI\NamestajDodavanjeIzmena.xaml.cs">
       <DependentUpon>NamestajDodavanjeIzmena.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\PreuzmiNamestaj.xaml.cs">
+      <DependentUpon>PreuzmiNamestaj.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\PreuzmiUslugu.xaml.cs">
+      <DependentUpon>PreuzmiUslugu.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\ProdajaProzor.xaml.cs">
       <DependentUpon>ProdajaProzor.xaml</DependentUpon>
@@ -117,6 +130,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\NamestajDodavanjeIzmena.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\PreuzmiNamestaj.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\PreuzmiUslugu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,5 +1,6 @@
 ﻿using POP_SF_53_2016_GUI.Model;
 using POP_SF_53_2016_GUI.Utils;
+using POP_SF_53_2016_GUI.DAO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,7 @@ namespace POP_SF_53_2016_GUI.UI
             DODAVANJE,
             IZMENA
         };
-        private Akcija akcija;
+        public Akcija akcija;
         private Operacija operacija;
         public AkcijaDodavanjeIzmena(Akcija akcija, Operacija operacija)
         {
@@ -35,28 +36,40 @@ namespace POP_SF_53_2016_GUI.UI
             this.akcija = akcija;
             dpPocetak.DataContext = akcija;
             dpKraj.DataContext = akcija;
-            var lista = Projekat.Instance.Namestaj;
-            var filtriranaLista = new List<Namestaj>();
-            for (int i = 0; i < lista.Count; i++)
-                if (lista[i].Obrisan == false)
-                    filtriranaLista.Add(lista[i]);
-            cbNamestaj.ItemsSource = filtriranaLista;
-            cbNamestaj.DataContext = akcija;
             tbPopust.DataContext = akcija;
+            dgNamestajAkcija.ItemsSource = akcija.NamestajPopust;
         }
 
         private void Potvrdi(object sender, RoutedEventArgs e)
         {
             this.DialogResult = true;
-            var lista = Projekat.Instance.Akcije;
-            var namestaj = (Namestaj)cbNamestaj.SelectedItem;
             if (operacija == Operacija.DODAVANJE)
             {
-                akcija.Id = lista.Count + 1;
-                lista.Add(akcija);
+                AkcijaDAO.DodavanjeAkcije(akcija);
             }
-            GenericSerializer.Serialize("Akcije.xml", lista);
+            AkcijaDAO.IzmenaAkcije(akcija);
             Close();
+        }
+
+        private void btnDodaj_Click(object sender, RoutedEventArgs e)
+        {
+            PreuzmiNamestaj pn = new PreuzmiNamestaj();
+            if (pn.ShowDialog() == true)
+            {
+                akcija = AkcijaDAO.DodavanjeNaAkciju(akcija, pn.Namestaj);
+            }
+
+        }
+
+        private void btnUkloni_Click(object sender, RoutedEventArgs e)
+        {
+            var izabrana = dgNamestajAkcija.SelectedItem as Namestaj;
+            akcija = AkcijaDAO.BrisanjeSaAkcije(akcija, izabrana);
+        }
+        private void dgNamestajAkcija_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            if ((string)e.Column.Header == "Obrisan" || (string)e.Column.Header == "Id")
+                e.Cancel = true;
         }
     }
 }

@@ -5,7 +5,7 @@
     <Obrisan>false</Obrisan>
     <PocetakAkcije>2017-12-03T22:51:23.5311966+01:00</PocetakAkcije>
     <KrajAkcije>2018-12-03T00:00:00</KrajAkcije>
-    <Popust>3</Popust>
+    <Popust>15</Popust>
     <NamestajPopustId>1</NamestajPopustId>
   </Akcija>
 </ArrayOfAkcija>

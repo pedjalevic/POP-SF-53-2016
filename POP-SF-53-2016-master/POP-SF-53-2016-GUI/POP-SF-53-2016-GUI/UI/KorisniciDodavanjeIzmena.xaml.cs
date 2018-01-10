@@ -1,4 +1,5 @@
-﻿using POP_SF_53_2016_GUI.Model;
+﻿using POP_SF_53_2016_GUI.DAO;
+using POP_SF_53_2016_GUI.Model;
 using POP_SF_53_2016_GUI.Utils;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,7 @@ namespace POP_SF_53_2016_GUI.UI
             DODAVANJE,
             IZMENA
         };
-        private Korisnik korisnik;
+        public Korisnik korisnik;
         private Operacija operacija;
         public KorisniciDodavanjeIzmena(Korisnik korisnik, Operacija operacija)
         {
@@ -45,16 +46,13 @@ namespace POP_SF_53_2016_GUI.UI
         private void Potvrdi(object sender, RoutedEventArgs e)
         {
             this.DialogResult = true;
-            var lista = Projekat.Instance.Korisnici;
             var tip_korisnika = (TipKorisnika)cbTipKorisnika.SelectedItem;
             if (operacija == Operacija.DODAVANJE)
             {
-                korisnik.Id = lista.Count + 1;
 
-                lista.Add(korisnik);
+                KorisnikDAO.DodavanjeKorisnika(korisnik);
             }
-
-            GenericSerializer.Serialize("Korisnici.xml", lista);
+            KorisnikDAO.IzmenaKorisnika(korisnik);
             Close();
         }
     }

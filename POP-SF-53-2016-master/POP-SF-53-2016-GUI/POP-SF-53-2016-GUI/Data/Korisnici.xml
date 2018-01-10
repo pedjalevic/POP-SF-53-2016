@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfKorisnik xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Korisnik>
-    <Id>1</Id>
+    <Id>0</Id>
     <Obrisan>false</Obrisan>
     <KorisnickoIme>levic</KorisnickoIme>
     <Lozinka>12345</Lozinka>
-    <Ime>Petar</Ime>
-    <Prezime>Petrovic</Prezime>
+    <Ime>milan</Ime>
+    <Prezime>drekavac</Prezime>
     <TipKorisnika>Administrator</TipKorisnika>
   </Korisnik>
   <Korisnik>
-    <Id>2</Id>
+    <Id>0</Id>
     <Obrisan>false</Obrisan>
-    <KorisnickoIme>levic2</KorisnickoIme>
+    <KorisnickoIme>levic1</KorisnickoIme>
     <Lozinka>12345</Lozinka>
     <Ime>Miroslav</Ime>
     <Prezime>Miric</Prezime>

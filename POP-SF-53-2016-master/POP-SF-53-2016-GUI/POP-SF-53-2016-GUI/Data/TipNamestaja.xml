@@ -5,4 +5,9 @@
     <Naziv>Kreveti</Naziv>
     <Id>1</Id>
   </TipNamestaja>
+  <TipNamestaja>
+    <Obrisan>false</Obrisan>
+    <Naziv>Tofrtaljka</Naziv>
+    <Id>2</Id>
+  </TipNamestaja>
 </ArrayOfTipNamestaja>
