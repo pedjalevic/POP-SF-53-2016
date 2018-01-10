@@ -25,7 +25,7 @@ namespace POP_SF_53_2016_GUI.UI
         public PreuzmiNamestaj()
         {
             InitializeComponent();
-            dgNamestajPreuzimanje.ItemsSource = NamestajDAO.SavNamestaj();
+            dgNamestajPreuzimanje.ItemsSource = Projekat.Instance.Namestaj.Where(a => a.AkcijskaCena == 0);
             dgNamestajPreuzimanje.SelectedIndex = 0;
         }
 
@@ -43,7 +43,7 @@ namespace POP_SF_53_2016_GUI.UI
         }
         private void dgNamestajPreuzimanje_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            if ((string)e.Column.Header == "Obrisan" || (string)e.Column.Header == "Id")
+            if ((string)e.Column.Header == "Obrisan" || (string)e.Column.Header == "Id" || (string)e.Column.Header == "TipNamestajaId")
                 e.Cancel = true;
         }
     }

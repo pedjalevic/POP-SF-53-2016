@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace POP_SF_53_2016_GUI.DAO
 {
@@ -35,72 +36,68 @@ namespace POP_SF_53_2016_GUI.DAO
             }
             return tipovi;
         }
-        public static TipNamestaja TipPoId(int id)
-        {
-
-            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Konekcija"].ToString()))
-            {
-                conn.Open();
-                SqlCommand cmd = new SqlCommand(@"SELECT * FROM TipNamestaja WHERE Obrisan=@obrisan and Id=@id", conn);
-                cmd.Parameters.Add(new SqlParameter("@id", id));
-                cmd.Parameters.Add(new SqlParameter("@obrisan", '0'));
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    TipNamestaja tip = new TipNamestaja()
-                    {
-                        Id = reader.GetInt32(0),
-                        Naziv = reader.GetString(1)
-                    };
-                    return tip;
-                }
-            }
-            return null;
-        }
         public static TipNamestaja DodavanjeTipa(TipNamestaja t)
         {
-            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Konekcija"].ToString()))
+            try
             {
-                conn.Open();
-                SqlCommand cmd = new SqlCommand(@" INSERT INTO TipNamestaja(Naziv,Obrisan) VALUES (@naziv,@Obrisan)", conn);
-                cmd.Parameters.Add(new SqlParameter("@naziv", t.Naziv));
-                cmd.Parameters.Add(new SqlParameter("@obrisan", '0'));
-                cmd.CommandText += "SELECT SCOPE_IDENTITY();";
+                using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Konekcija"].ToString()))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(@" INSERT INTO TipNamestaja(Naziv,Obrisan) VALUES (@naziv,@Obrisan)", conn);
+                    cmd.Parameters.Add(new SqlParameter("@naziv", t.Naziv));
+                    cmd.Parameters.Add(new SqlParameter("@obrisan", '0'));
+                    cmd.CommandText += "SELECT SCOPE_IDENTITY();";
 
-                int newId = int.Parse(cmd.ExecuteScalar().ToString());
-                t.Id = newId;
+                    int newId = int.Parse(cmd.ExecuteScalar().ToString());
+                    t.Id = newId;
+                }
+                Projekat.Instance.TipNamestaja.Add(t);
+                return t;
             }
-            Projekat.Instance.TipNamestaja.Add(t);
-            return t;
+            catch { MessageBox.Show("Upis u bazu nije uspeo.\nMolimo da pokusate ponovo!", "Greska", MessageBoxButton.OK, MessageBoxImage.Warning); return null; }
+
         }
         public static bool BrisanjeTipa(TipNamestaja t)
         {
             t.Obrisan = true;
+            foreach (var n in Projekat.Instance.Namestaj)
+            {
+                if (n.TipNamestaja.Id == t.Id)
+                {
+                    n.TipNamestajaId = 0;
+                    n.TipNamestaja = null;
+                    NamestajDAO.IzmenaNamestaja(n);
+                }
+            }
             return IzmenaTipa(t);
         }
         public static bool IzmenaTipa(TipNamestaja t)
         {
-            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Konekcija"].ToString()))
+            try
             {
-                conn.Open();
-                SqlCommand cmd = new SqlCommand(@" UPDATE TipNamestaja SET Naziv=@naziv, Obrisan=@obrisan WHERE Id=@id", conn);
-                cmd.Parameters.Add(new SqlParameter("@naziv", t.Naziv));
-                cmd.Parameters.Add(new SqlParameter("@Id", t.Id));
-                cmd.Parameters.Add(new SqlParameter("@obrisan", t.Obrisan));
-                cmd.ExecuteNonQuery();
-
-            }
-            foreach (var item in Projekat.Instance.TipNamestaja)
-            {
-                if (item.Id == t.Id)
+                using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Konekcija"].ToString()))
                 {
-                    item.Id = t.Id;
-                    item.Naziv = t.Naziv;
-                    item.Obrisan = t.Obrisan;
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(@" UPDATE TipNamestaja SET Naziv=@naziv, Obrisan=@obrisan WHERE Id=@id", conn);
+                    cmd.Parameters.Add(new SqlParameter("@naziv", t.Naziv));
+                    cmd.Parameters.Add(new SqlParameter("@Id", t.Id));
+                    cmd.Parameters.Add(new SqlParameter("@obrisan", t.Obrisan));
+                    cmd.ExecuteNonQuery();
+
                 }
+                foreach (var item in Projekat.Instance.TipNamestaja)
+                {
+                    if (item.Id == t.Id)
+                    {
+                        item.Id = t.Id;
+                        item.Naziv = t.Naziv;
+                        item.Obrisan = t.Obrisan;
+                    }
+                }
+                return true;
             }
-            return true;
+            catch { MessageBox.Show("Upis u bazu nije uspeo.\nMolimo da pokusate ponovo!", "Greska", MessageBoxButton.OK, MessageBoxImage.Warning); return false; }
+
         }
         public static ObservableCollection<TipNamestaja> PretraziTipove(string tekst)
         {
@@ -109,7 +106,7 @@ namespace POP_SF_53_2016_GUI.DAO
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Konekcija"].ToString()))
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand(@"SELECT * FROM TipNamestaja WHERE Obrisan=@obrisan AND Naziv like @tekst", conn);
+                SqlCommand cmd = new SqlCommand(@"SELECT * FROM TipNamestaja WHERE Obrisan=@obrisan AND Naziv LIKE @tekst", conn);
                 cmd.Parameters.Add(new SqlParameter("@obrisan", '0'));
                 cmd.Parameters.Add(new SqlParameter("@tekst", "%" + tekst + "%"));
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -126,28 +123,6 @@ namespace POP_SF_53_2016_GUI.DAO
             }
             return tipovi;
         }
-        public static ObservableCollection<TipNamestaja> SortirajTipove(string tekst)
-        {
-            ObservableCollection<TipNamestaja> tipovi = new ObservableCollection<TipNamestaja>();
 
-            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Konekcija"].ToString()))
-            {
-                conn.Open();
-                SqlCommand cmd = new SqlCommand(@"SELECT * FROM TipNamestaja WHERE Obrisan=@obrisan ORDER BY " + tekst, conn);
-                cmd.Parameters.Add(new SqlParameter("@obrisan", '0'));
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    TipNamestaja tip = new TipNamestaja()
-                    {
-                        Id = reader.GetInt32(0),
-                        Naziv = reader.GetString(1)
-                    };
-                    tipovi.Add(tip);
-                }
-            }
-            return tipovi;
-        }
     }
 }

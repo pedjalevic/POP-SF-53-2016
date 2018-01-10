@@ -18,31 +18,15 @@ namespace POP_SF_53_2016_GUI.Model
         private string sifra;
         private int kolicina;
         private TipNamestaja tipNamestaja;
-        [XmlIgnore]
-        public TipNamestaja TipNamestaja
+        public string Naziv
         {
-            get
-            {
-                return tipNamestaja;
-            }
+            get { return naziv; }
             set
             {
-                tipNamestaja = value;
-                OnPropertyChanged("TipNamestaja");
+                naziv = value;
+                OnPropertyChanged("Naziv");
             }
         }
-
-
-        public int Kolicina
-        {
-            get { return kolicina; }
-            set
-            {
-                kolicina = value;
-                OnPropertyChanged("Kolicina");
-            }
-        }
-
 
         public string Sifra
         {
@@ -54,14 +38,13 @@ namespace POP_SF_53_2016_GUI.Model
             }
         }
 
-
-        public bool Obrisan
+        public int Kolicina
         {
-            get { return obrisan; }
+            get { return kolicina; }
             set
             {
-                obrisan = value;
-                OnPropertyChanged("Obrisan");
+                kolicina = value;
+                OnPropertyChanged("Kolicina");
             }
         }
 
@@ -76,14 +59,52 @@ namespace POP_SF_53_2016_GUI.Model
         }
 
 
-        public string Naziv
+        private int tipNamestajaId;
+
+        public int TipNamestajaId
         {
-            get { return naziv; }
+            get { return tipNamestajaId; }
+            set { tipNamestajaId = value; }
+        }
+
+
+        public TipNamestaja TipNamestaja
+        {
+            get
+            {
+                if (tipNamestaja == null)
+                    tipNamestaja = TipNamestaja.PronadjiTip(tipNamestajaId);
+                return tipNamestaja;
+            }
             set
             {
-                naziv = value;
+                tipNamestaja = value;
+                if (TipNamestaja != null)
+                    TipNamestajaId = tipNamestaja.Id;
+                OnPropertyChanged("TipNamestaja");
             }
         }
+
+
+
+
+
+
+
+
+        public bool Obrisan
+        {
+            get { return obrisan; }
+            set
+            {
+                obrisan = value;
+                OnPropertyChanged("Obrisan");
+            }
+        }
+
+
+
+
 
 
         public int Id
@@ -94,6 +115,18 @@ namespace POP_SF_53_2016_GUI.Model
                 id = value;
                 OnPropertyChanged("Id");
 
+            }
+        }
+
+        private double akcijskaCena;
+
+        public double AkcijskaCena
+        {
+            get { return akcijskaCena; }
+            set
+            {
+                akcijskaCena = value;
+                OnPropertyChanged("AkcijskaCena");
             }
         }
 
@@ -146,6 +179,7 @@ namespace POP_SF_53_2016_GUI.Model
             kopija.Sifra = Sifra;
             kopija.Cena = Cena;
             kopija.TipNamestaja = TipNamestaja;
+            kopija.AkcijskaCena = AkcijskaCena;
             return kopija;
         }
     }

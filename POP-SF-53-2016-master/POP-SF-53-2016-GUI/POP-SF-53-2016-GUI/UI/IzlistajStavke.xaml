@@ -5,9 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF_53_2016_GUI.UI"
         mc:Ignorable="d"
-        Title="IzlistajStavke" Height="405" Width="435" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Background="#4169E1">
+        Title="IzlistajStavke"  Width="587" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Height="379" Background="#4169E1">
     <Grid>
-        <Button x:Name="btnIzadji" Content="Izadji" HorizontalAlignment="Left" Height="41" Margin="139,321,0,0" VerticalAlignment="Top" Width="154" Click="Izlaz"/>
-        <TextBlock x:Name="tbIspis" HorizontalAlignment="Left" Height="316" TextWrapping="Wrap" VerticalAlignment="Top" Width="431" Background="White"/>
+        <ScrollViewer Margin="0,0,0,62" Name="ScrollBar" >
+            <TextBlock Name="tbIspis"  HorizontalAlignment="Left"  TextWrapping="Wrap" VerticalAlignment="Top" Width="571" Background="White" FontSize="20"  />
+        </ScrollViewer>
+        <DataGrid Name="dgAkcijePrikaz" IsReadOnly="True" CanUserAddRows="False" ColumnWidth="*" Margin="0,0,0,134" AutoGeneratingColumn="dgAkcijePrikaz_AutoGeneratingColumn" />
+        <Button Name="btnIzadji" Content="Izadji" HorizontalAlignment="Left" Height="34" Margin="242,306,0,0" VerticalAlignment="Top" Width="104" Click="Izlaz"/>
     </Grid>
 </Window>

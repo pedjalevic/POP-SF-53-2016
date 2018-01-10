@@ -45,15 +45,36 @@ namespace POP_SF_53_2016_GUI.UI
 
         private void Potvrdi(object sender, RoutedEventArgs e)
         {
+            if (Provera() == true)
+            {
+                return;
+            }
             this.DialogResult = true;
             var tip_korisnika = (TipKorisnika)cbTipKorisnika.SelectedItem;
             if (operacija == Operacija.DODAVANJE)
             {
-
                 KorisnikDAO.DodavanjeKorisnika(korisnik);
             }
-            KorisnikDAO.IzmenaKorisnika(korisnik);
-            Close();
+            else
+                KorisnikDAO.IzmenaKorisnika(korisnik);
+            this.Close();
+        }
+        public bool Provera()
+        {
+            BindingExpression be1 = tbIme.GetBindingExpression(TextBox.TextProperty);
+            be1.UpdateSource();
+            BindingExpression be2 = tbPrezime.GetBindingExpression(TextBox.TextProperty);
+            be1.UpdateSource();
+            BindingExpression be3 = tbKorisnickoIme.GetBindingExpression(TextBox.TextProperty);
+            be1.UpdateSource();
+            BindingExpression be4 = tbLozinka.GetBindingExpression(TextBox.TextProperty);
+            be1.UpdateSource();
+            if (Validation.GetHasError(tbIme) == true || Validation.GetHasError(tbPrezime) == true
+                || Validation.GetHasError(tbKorisnickoIme) == true || Validation.GetHasError(tbLozinka) == true)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

@@ -17,6 +17,7 @@ namespace POP_SF_53_2016_GUI.Model
             datumProdaje = DateTime.Today;
             stavkeProdaje = new ObservableCollection<StavkaProdaje>();
             dodatneUsluge = new ObservableCollection<DodatneUsluge>();
+            dodatneUslugeId = new List<int>();
         }
         private int id;
 
@@ -29,6 +30,13 @@ namespace POP_SF_53_2016_GUI.Model
                 id = value;
                 OnPropertyChanged("Id");
             }
+        }
+        private List<int> dodatneUslugeId;
+
+        public List<int> DodatneUslugeId
+        {
+            get { return dodatneUslugeId; }
+            set { dodatneUslugeId = value; }
         }
 
         private ObservableCollection<StavkaProdaje> stavkeProdaje;
@@ -94,10 +102,10 @@ namespace POP_SF_53_2016_GUI.Model
 
         public double UkupanIznos
         {
-            get { return ukupanIznos; }
+            get { return ukupanIznos = stavkeProdaje.Sum(item => item.Cena) + dodatneUsluge.Sum(item => item.Cena); }
             set
             {
-                ukupanIznos = value;
+                ukupanIznos = stavkeProdaje.Sum(item => item.Cena) + dodatneUsluge.Sum(item => item.Cena);
 
 
                 OnPropertyChanged("UkupanIznos");
@@ -168,13 +176,15 @@ namespace POP_SF_53_2016_GUI.Model
         public object Clone()
         {
             ProdajaNamestaja kopija = new ProdajaNamestaja();
-            kopija.Id = id;
-            kopija.Kupac = kupac;
+            kopija.Id = Id;
+            kopija.Kupac = Kupac;
             kopija.DatumProdaje = DatumProdaje;
-            kopija.UkupanIznos = ukupanIznos;
-            kopija.BrojRacuna = brojRacuna;
-            kopija.StavkeProdaje = stavkeProdaje;
-            kopija.DodatneUsluge = DodatneUsluge;
+            kopija.UkupanIznos = UkupanIznos;
+            kopija.BrojRacuna = BrojRacuna;
+            ObservableCollection<StavkaProdaje> kopijaStavki = new ObservableCollection<StavkaProdaje>(StavkeProdaje);
+            ObservableCollection<DodatneUsluge> kopijaUsluga = new ObservableCollection<DodatneUsluge>(DodatneUsluge);
+            kopija.StavkeProdaje = kopijaStavki;
+            kopija.DodatneUsluge = kopijaUsluga;
             return kopija;
         }
     }

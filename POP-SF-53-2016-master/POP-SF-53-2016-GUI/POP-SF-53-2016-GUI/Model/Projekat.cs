@@ -16,9 +16,10 @@ namespace POP_SF_53_2016_GUI.Model
         public ObservableCollection<TipNamestaja> TipNamestaja { get; set; }
         public ObservableCollection<Akcija> Akcije { get; set; }
         public ObservableCollection<Korisnik> Korisnici { get; set; }
-        public ObservableCollection<ProdajaNamestaja> Prodaja { get; set; } = GenericSerializer.Deserialize<ProdajaNamestaja>("ProdajaNamestaja.xml");
+        public ObservableCollection<ProdajaNamestaja> Prodaja { get; set; }
         public ObservableCollection<DodatneUsluge> DodatneUsluge { get; set; }
-        public ObservableCollection<StavkaProdaje> StavkeProdaje { get; set; } = GenericSerializer.Deserialize<StavkaProdaje>("StavkeProdaje.xml");
+        public ObservableCollection<StavkaProdaje> StavkeProdaje { get; set; }
+        public Salon Salon { get; set; }
 
         private Projekat()
         {
@@ -28,6 +29,7 @@ namespace POP_SF_53_2016_GUI.Model
             Korisnici = KorisnikDAO.SviKorisnici();
             DodatneUsluge = UslugeDAO.SveUsluge();
             Prodaja = ProdajaDAO.SveProdaje();
+            Salon = SalonDAO.PrikazPodataka();
 
         }
     }

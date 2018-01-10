@@ -59,9 +59,9 @@ namespace POP_SF_53_2016_GUI.Model
             }
         }
 
-        private double popust;
+        private int popust;
 
-        public double Popust
+        public int Popust
         {
             get { return popust; }
             set
@@ -71,9 +71,9 @@ namespace POP_SF_53_2016_GUI.Model
             }
         }
 
-        private int namestajPopustId;
+        private List<int> namestajPopustId;
 
-        public int NamestajPopustId
+        public List<int> NamestajPopustId
         {
             get { return namestajPopustId; }
             set
@@ -101,6 +101,7 @@ namespace POP_SF_53_2016_GUI.Model
             pocetakAkcije = DateTime.Now;
             krajAkcije = DateTime.Now;
             namestajPopust = new ObservableCollection<Namestaj>();
+            namestajPopustId = new List<int>();
         }
 
 

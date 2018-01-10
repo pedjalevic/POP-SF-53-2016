@@ -39,6 +39,10 @@ namespace POP_SF_53_2016_GUI.UI
 
         private void Potvrdi(object sender, RoutedEventArgs e)
         {
+            if (Provera() == true)
+            {
+                return;
+            }
             this.DialogResult = true;
 
             if (operacija == Operacija.DODAVANJE)
@@ -46,8 +50,19 @@ namespace POP_SF_53_2016_GUI.UI
 
                 TipNamestajaDAO.DodavanjeTipa(tipNamestaja);
             }
-            TipNamestajaDAO.IzmenaTipa(tipNamestaja);
-            Close();
+            else
+                TipNamestajaDAO.IzmenaTipa(tipNamestaja);
+            this.Close();
+        }
+        public bool Provera()
+        {
+            BindingExpression be1 = tbNazivTipa.GetBindingExpression(TextBox.TextProperty);
+            be1.UpdateSource();
+            if (Validation.GetHasError(tbNazivTipa) == true)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

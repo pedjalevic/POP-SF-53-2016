@@ -1,0 +1,110 @@
+﻿<Window x:Class="POP_SF_53_2016_GUI.UI.SalonProzor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:POP_SF_53_2016_GUI.UI"
+        mc:Ignorable="d"
+        Title="SalonProzor" Height="440" Width="550" Background="#4169E1" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <ControlTemplate x:Key="TextBoxError">
+            <DockPanel LastChildFill="True">
+                <TextBlock DockPanel.Dock="Right" Foreground="Red" FontSize="12pt">Polje ne sme biti prazno!</TextBlock>
+                <Border BorderBrush="Red" BorderThickness="1">
+                    <AdornedElementPlaceholder />
+                </Border>
+            </DockPanel>
+        </ControlTemplate>
+        <local:ValidationConverter x:Key="converter"/>
+    </Window.Resources>
+    <Grid>
+        <Label Content="Naziv:" HorizontalAlignment="Left" Height="29" Margin="108,23,0,0" VerticalAlignment="Top" Width="66" FontSize="16" Foreground="White"/>
+        <Label Content="Adresa:" HorizontalAlignment="Left" Height="29" Margin="108,52,0,0" VerticalAlignment="Top" Width="66" FontSize="16" Foreground="White"/>
+        <Label Content="Broj telefona:" HorizontalAlignment="Left" Height="30" Margin="69,86,0,0" VerticalAlignment="Top" Width="105" FontSize="16" Foreground="White"/>
+        <Label Content="Email:" HorizontalAlignment="Left" Height="29" Margin="108,121,0,0" VerticalAlignment="Top" Width="66" FontSize="16" Foreground="White"/>
+        <Label Content="Adresa sajta:" HorizontalAlignment="Left" Height="32" Margin="69,155,0,0" VerticalAlignment="Top" Width="105" FontSize="16" Foreground="White"/>
+        <Label Content="PIB:" HorizontalAlignment="Left" Height="29" Margin="108,192,0,0" VerticalAlignment="Top" Width="66" FontSize="16" Foreground="White"/>
+        <Label Content="Maticni broj:" HorizontalAlignment="Left" Height="32" Margin="69,225,0,0" VerticalAlignment="Top" Width="105" FontSize="16" Foreground="White"/>
+        <Label Content="Ziro racun:" HorizontalAlignment="Left" Height="32" Margin="69,257,0,0" VerticalAlignment="Top" Width="105" FontSize="16" Foreground="White"/>
+        <TextBox x:Name="tbNaziv" Validation.ErrorTemplate="{StaticResource ResourceKey=TextBoxError}" HorizontalAlignment="Left" VerticalContentAlignment="Center" Height="29" Margin="179,23,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="145">
+            <TextBox.Text>
+                <Binding Path="Naziv" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local:StringValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox x:Name="tbAdresa" Validation.ErrorTemplate="{StaticResource ResourceKey=TextBoxError}" HorizontalAlignment="Left" VerticalContentAlignment="Center" Height="29" Margin="179,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="145">
+            <TextBox.Text>
+                <Binding Path="Adresa" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local:StringValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox x:Name="tbTelefon" Validation.ErrorTemplate="{StaticResource ResourceKey=TextBoxError}" HorizontalAlignment="Left" VerticalContentAlignment="Center" Height="29" Margin="179,91,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="145">
+            <TextBox.Text>
+                <Binding Path="Broj_telefona" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local:StringValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox x:Name="tbEmail"  HorizontalAlignment="Left" VerticalContentAlignment="Center" Height="29" Margin="179,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="145">
+            <TextBox.Text>
+                <Binding Path="Email" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local:EmailValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox x:Name="tbSajt"  Validation.ErrorTemplate="{StaticResource ResourceKey=TextBoxError}" HorizontalAlignment="Left" VerticalContentAlignment="Center" Height="29" Margin="179,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="145">
+            <TextBox.Text>
+                <Binding Path="Adresa_sajta" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local:StringValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox x:Name="tbPIB" Validation.ErrorTemplate="{StaticResource ResourceKey=TextBoxError}" HorizontalAlignment="Left" VerticalContentAlignment="Center" Height="29" Margin="179,194,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="145">
+            <TextBox.Text>
+                <Binding Path="PIB" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local:StringValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox x:Name="tbMaticni"  HorizontalAlignment="Left" VerticalContentAlignment="Center" Height="29" Margin="179,228,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="145">
+            <TextBox.Text>
+                <Binding Path="Maticni_broj" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local:IntValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox x:Name="tbZiroRacun" Validation.ErrorTemplate="{StaticResource ResourceKey=TextBoxError}"  HorizontalAlignment="Left" VerticalContentAlignment="Center" Height="29" Margin="179,262,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="145">
+            <TextBox.Text>
+                <Binding Path="Broj_ziro_racuna" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local:StringValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <Button x:Name="btnPotvrdi" Content="Potvrdi" HorizontalAlignment="Left" Height="33" Margin="149,368,0,0" VerticalAlignment="Top" Width="95" Click="Potvrdi"/>
+        <Button x:Name="btnOdustani" Content="Odustani" HorizontalAlignment="Left" Height="33" Margin="268,368,0,0" VerticalAlignment="Top" Width="95"  Click="btnOdustani_Click"/>
+        <TextBlock x:Name="tbcIspis" HorizontalAlignment="Left" Height="318" Margin="69,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="401" Background="White" FontSize="16" FontWeight="Bold"/>
+        <TextBlock x:Name="tbGreskaMaticniBroj"  Margin="117,310,0,0" Foreground="Red" FontWeight="Bold" Text="{Binding ElementName=tbMaticni, Path=(Validation.Errors), Converter={StaticResource ResourceKey=converter}}" HorizontalAlignment="Left" Width="364" Height="23" VerticalAlignment="Top" />
+
+        <TextBlock x:Name="tbGreskaEmail"  Margin="119,337,0,0" Foreground="Red" FontWeight="Bold" 
+                           Text="{Binding ElementName=tbEmail, Path=(Validation.Errors), Converter={StaticResource ResourceKey=converter}}" 
+                           HorizontalAlignment="Left" Width="364" Height="23" VerticalAlignment="Top" />
+    </Grid>
+</Window>

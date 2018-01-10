@@ -3,6 +3,7 @@ using POP_SF_53_2016_GUI.Model;
 using POP_SF_53_2016_GUI.Utils;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,6 +30,10 @@ namespace POP_SF_53_2016_GUI.UI
         };
         private ProdajaNamestaja prodaja;
         private Operacija operacija;
+        public ObservableCollection<StavkaProdaje> dodatestavke = new ObservableCollection<StavkaProdaje>();
+        public ObservableCollection<DodatneUsluge> dodateusluge = new ObservableCollection<DodatneUsluge>();
+        public ObservableCollection<StavkaProdaje> obrisanestavke = new ObservableCollection<StavkaProdaje>();
+        public ObservableCollection<DodatneUsluge> obrisaneusluge = new ObservableCollection<DodatneUsluge>();
         public ProdajaProzor(ProdajaNamestaja prodaja, Operacija operacija)
         {
             InitializeComponent();
@@ -46,22 +51,36 @@ namespace POP_SF_53_2016_GUI.UI
             StavkeProzor st = new StavkeProzor(stavka, StavkeProzor.Operacija.DODAVANJE);
             if (st.ShowDialog() == true)
             {
-                prodaja = ProdajaDAO.DodajStavku(prodaja, st.Stavka);
+                prodaja.StavkeProdaje.Add(st.Stavka);
+                dodatestavke.Add(st.Stavka);
             }
         }
 
         private void Potvrdi(object sender, RoutedEventArgs e)
         {
+            if (Provera() == true)
+            {
+                return;
+            }
             Random rn = new Random();
             this.DialogResult = true;
-            prodaja.UkupanIznos = prodaja.StavkeProdaje.Sum(item => item.Cena) + prodaja.DodatneUsluge.Sum(item => item.Cena);
+
             if (operacija == Operacija.DODAVANJE)
             {
+
                 prodaja.BrojRacuna = rn.Next(100, 10000);
                 ProdajaDAO.DodajProdaju(prodaja);
             }
-            ProdajaDAO.IzmenaProdaje(prodaja);
-
+            else
+            {
+                ProdajaDAO.IzmenaProdaje(prodaja);
+                if (dodatestavke.Count > 0)
+                    ProdajaDAO.DodajStavku(prodaja, dodatestavke);
+                if (dodateusluge.Count > 0)
+                    ProdajaDAO.DodajUslugu(prodaja, dodateusluge);
+                ProdajaDAO.ObrisiStavku(prodaja, obrisanestavke);
+                ProdajaDAO.ObrisiUslugu(prodaja, obrisaneusluge);
+            }
             this.Close();
         }
 
@@ -77,7 +96,10 @@ namespace POP_SF_53_2016_GUI.UI
         private void UkloniStavku(object sender, RoutedEventArgs e)
         {
             StavkaProdaje izabrana = dgStavke.SelectedItem as StavkaProdaje;
-            prodaja = ProdajaDAO.ObrisiStavku(prodaja, izabrana);
+            prodaja.StavkeProdaje.Remove(izabrana);
+            obrisanestavke.Add(izabrana);
+            if (dodatestavke.Contains(izabrana) == true)
+                dodatestavke.Remove(izabrana);
 
         }
 
@@ -87,7 +109,8 @@ namespace POP_SF_53_2016_GUI.UI
             if (pu.ShowDialog() == true)
             {
 
-                prodaja = ProdajaDAO.DodajUslugu(prodaja, pu.Usluge);
+                prodaja.DodatneUsluge.Add(pu.Usluge);
+                dodateusluge.Add(pu.Usluge);
 
             }
         }
@@ -96,13 +119,25 @@ namespace POP_SF_53_2016_GUI.UI
         {
             var izabrana = dgUsluge.SelectedItem as DodatneUsluge;
             prodaja.DodatneUsluge.Remove(izabrana);
-            prodaja = ProdajaDAO.ObrisiUslugu(prodaja, izabrana);
+            obrisaneusluge.Add(izabrana);
+            if (dodateusluge.Contains(izabrana) == true)
+                dodateusluge.Remove(izabrana);
         }
 
         private void dgUsluge_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
             if ((string)e.Column.Header == "Id" || (string)e.Column.Header == "Obrisan")
                 e.Cancel = true;
+        }
+        public bool Provera()
+        {
+            BindingExpression be1 = tbKupac.GetBindingExpression(TextBox.TextProperty);
+            be1.UpdateSource();
+            if (Validation.GetHasError(tbKupac) == true)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

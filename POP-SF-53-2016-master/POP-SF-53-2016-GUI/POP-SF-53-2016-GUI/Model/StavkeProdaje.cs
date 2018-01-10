@@ -31,6 +31,14 @@ namespace POP_SF_53_2016_GUI.Model
             set { kolicina = value; }
         }
 
+        private int namestajProdajaId;
+
+        public int NamestajProdajaId
+        {
+            get { return namestajProdajaId; }
+            set { namestajProdajaId = value; }
+        }
+
         private Namestaj namestajProdaja;
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -71,19 +79,24 @@ namespace POP_SF_53_2016_GUI.Model
         }
         public double Cena
         {
-            get { return cena; }
+            get
+            {
+                if (NamestajProdaja != null)
+                {
+                    if (NamestajProdaja.AkcijskaCena != 0)
+                        return cena = NamestajProdaja.AkcijskaCena * Kolicina;
+                    else
+                        return cena = NamestajProdaja.Cena * Kolicina;
+                }
+                else
+                    return 0;
+            }
             set
             {
-                cena = value;
+                if (NamestajProdaja != null)
+                    cena = NamestajProdaja.Cena * Kolicina;
                 OnPropertyChanged("Cena");
             }
-        }
-        public override string ToString()
-        {
-            string ispis = "";
-            ispis += NamestajProdaja.Naziv;
-            return ispis;
-
         }
         public static StavkaProdaje PronadjiStavku(int id)
         {

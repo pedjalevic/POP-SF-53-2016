@@ -40,15 +40,32 @@ namespace POP_SF_53_2016_GUI.Data
 
         private void Potvrdi(object sender, RoutedEventArgs e)
         {
-        this.DialogResult = true;
+            if (Provera() == true)
+            {
+                return;
+            }
+            this.DialogResult = true;
 
-        if (operacija == Operacija.DODAVANJE)
-        {
+
+            if (operacija == Operacija.DODAVANJE)
+            {
                 UslugeDAO.DodavanjeUsluge(dodatneUsluge);
             }
-
-            UslugeDAO.IzmenaUsluge(dodatneUsluge);
-            Close();
-    }
+            else
+                UslugeDAO.IzmenaUsluge(dodatneUsluge);
+            this.Close();
+        }
+        public bool Provera()
+        {
+            BindingExpression be1 = tbNazivUsluge.GetBindingExpression(TextBox.TextProperty);
+            be1.UpdateSource();
+            BindingExpression be3 = tbCenaUsluge.GetBindingExpression(TextBox.TextProperty);
+            be1.UpdateSource();
+            if (Validation.GetHasError(tbNazivUsluge) == true || Validation.GetHasError(tbCenaUsluge) == true)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

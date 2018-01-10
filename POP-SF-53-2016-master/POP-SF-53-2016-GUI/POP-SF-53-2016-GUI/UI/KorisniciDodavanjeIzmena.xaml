@@ -5,20 +5,66 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF_53_2016_GUI.UI"
         mc:Ignorable="d"
-        Title="KorisniciDodavanjeIzmena" Height="300" Width="450" Background="#4169E1" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="KorisniciDodavanjeIzmena" Height="340" Width="450" Background="#4169E1" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Window.Resources>
+        <ControlTemplate x:Key="TextBoxError">
+            <DockPanel LastChildFill="True">
+                <TextBlock DockPanel.Dock="Right" Foreground="Red" FontSize="12pt">Polje ne sme biti prazno!</TextBlock>
+                <Border BorderBrush="Red" BorderThickness="1">
+                    <AdornedElementPlaceholder />
+                </Border>
+            </DockPanel>
+        </ControlTemplate>
+        <local:ValidationConverter x:Key="converter"/>
+    </Window.Resources>
     <Grid>
         <Label Content="Ime:" HorizontalAlignment="Left"  Height="30" Margin="80,30,0,0" VerticalAlignment="Top" Width="84" />
-        <TextBox x:Name="tbIme" VerticalContentAlignment="Center" Text="{Binding Path=Ime}" HorizontalAlignment="Left" Height="27" Margin="183,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143"/>
+        <TextBox x:Name="tbIme" Validation.ErrorTemplate="{StaticResource ResourceKey=TextBoxError}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="27" Margin="183,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143">
+            <TextBox.Text>
+                <Binding Path="Ime" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local:StringValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
         <Label Content="Prezime:" HorizontalAlignment="Left" Height="30" Margin="80,70,0,0" VerticalAlignment="Top" Width="84"  RenderTransformOrigin="0.476,0.7"/>
-        <TextBox x:Name="tbPrezime" VerticalContentAlignment="Center" Text="{Binding Path=Prezime}" HorizontalAlignment="Left" Height="27" Margin="183,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143"/>
+        <TextBox x:Name="tbPrezime" Validation.ErrorTemplate="{StaticResource ResourceKey=TextBoxError}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="27" Margin="183,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143">
+            <TextBox.Text>
+                <Binding Path="Prezime" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local:StringValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
         <Label Content="Korisnicko ime:" HorizontalAlignment="Left" Height="30" Margin="80,110,0,0" VerticalAlignment="Top" Width="127"  RenderTransformOrigin="0.488,0.667"/>
-        <TextBox x:Name="tbKorisnickoIme" VerticalContentAlignment="Center" Text="{Binding Path=KorisnickoIme}" HorizontalAlignment="Left" Height="27" Margin="183,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143"/>
-        <Button x:Name="btnPotvrdi" Content="Potvrdi" HorizontalAlignment="Left" Height="33" Margin="100,230,0,0" VerticalAlignment="Top" Width="90" IsCancel="True" Click="Potvrdi"/>
-        <Button x:Name="btnOtkazi" Content="Otkazi" HorizontalAlignment="Left" Height="33" Margin="230,230,0,0" VerticalAlignment="Top" Width="90" IsCancel="True"/>
+        <TextBox x:Name="tbKorisnickoIme" VerticalContentAlignment="Center"  HorizontalAlignment="Left" Height="27" Margin="183,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143">
+            <TextBox.Text>
+                <Binding Path="KorisnickoIme" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local:KorisnickoImeValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <Button x:Name="btnPotvrdi" Content="Potvrdi" HorizontalAlignment="Left" Height="33" Margin="100,270,0,0" VerticalAlignment="Top" Width="90" IsCancel="True" Click="Potvrdi"/>
+        <Button x:Name="btnOtkazi" Content="Otkazi" HorizontalAlignment="Left" Height="33" Margin="230,270,0,0" VerticalAlignment="Top" Width="90" IsCancel="True"/>
         <Label Content="Lozinka:"   HorizontalAlignment="Left" Height="29" Margin="80,150,0,0" VerticalAlignment="Top" Width="99" />
-        <TextBox x:Name="tbLozinka" VerticalContentAlignment="Center" Text="{Binding Path=Lozinka}" HorizontalAlignment="Left" Height="27" Margin="183,150,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143"/>
+        <TextBox x:Name="tbLozinka" VerticalContentAlignment="Center" Validation.ErrorTemplate="{StaticResource ResourceKey=TextBoxError}" HorizontalAlignment="Left" Height="27" Margin="183,150,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143">
+            <TextBox.Text>
+                <Binding Path="Lozinka" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local:StringValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
         <ComboBox x:Name="cbTipKorisnika" HorizontalAlignment="Left" Height="25" Margin="183,190,0,0" VerticalAlignment="Top" Width="143" SelectedItem="{Binding Path=TipKorisnika}"/>
         <Label Content="Tip Korisnika:" HorizontalAlignment="Left" Height="36" Margin="80,190,0,0" VerticalAlignment="Top" Width="116"/>
+        <TextBlock x:Name="tbIspisGreske"  Margin="100,225,0,0" Foreground="Red" FontWeight="Bold" 
+                           Text="{Binding ElementName=tbKorisnickoIme, Path=(Validation.Errors), Converter={StaticResource ResourceKey=converter}}"
+                           HorizontalAlignment="Left" Width="364" Height="23" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

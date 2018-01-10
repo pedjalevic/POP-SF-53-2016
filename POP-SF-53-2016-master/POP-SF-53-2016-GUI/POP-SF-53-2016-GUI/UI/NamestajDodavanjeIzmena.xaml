@@ -6,19 +6,58 @@
         xmlns:local="clr-namespace:POP_SF_53_2016_GUI.UI"
         mc:Ignorable="d"
         Title="NamestajDodavanjeIzmena" Height="300" Width="450" Background="#4169E1" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Window.Resources>
+        <ControlTemplate x:Key="TextBoxError">
+            <DockPanel LastChildFill="True">
+                <TextBlock DockPanel.Dock="Right" Foreground="Red" FontSize="12pt">Polje ne sme biti prazno!</TextBlock>
+                <Border BorderBrush="Red" BorderThickness="1">
+                    <AdornedElementPlaceholder />
+                </Border>
+            </DockPanel>
+        </ControlTemplate>
+        <local:ValidationConverter x:Key="converter"/>
+    </Window.Resources>
     <Grid>
         <Label Content="Naziv:" HorizontalAlignment="Left" Height="28" Margin="80,10,0,0" VerticalAlignment="Top" Width="75" />
-        <Label Content="Sifra:" HorizontalAlignment="Left" Height="27" Margin="80,50,0,0" VerticalAlignment="Top" Width="75" />
-        <Label Content="Cena:" HorizontalAlignment="Left" Margin="80,90,0,0" VerticalAlignment="Top" Width="75" FontSize="14" />
-        <Label Content="Kolicina:" HorizontalAlignment="Left" Height="28" Margin="80,130,0,0" VerticalAlignment="Top" Width="75" />
-        <Label Content="Tip namestaja:" HorizontalAlignment="Left" Height="27" Margin="80,170,0,0" VerticalAlignment="Top" Width="105" />
-        <Button x:Name="btnPotvrdi" Content="Potvrdi" HorizontalAlignment="Left" Height="35" Margin="117,224,0,0" VerticalAlignment="Top" Width="81" IsDefault="True" Click="Potvrdi"/>
-        <Button x:Name="btnOtkazi" Content="Otkazi" HorizontalAlignment="Left" Height="35" Margin="230,224,0,0" VerticalAlignment="Top" Width="81" IsCancel="True"/>
-        <TextBox x:Name="tbNazivNamestaja" Text="{Binding Path=Naziv}" HorizontalAlignment="Left" Height="28" Margin="180,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143"/>
-        <TextBox x:Name="tbSifraNamestaja"  Text="{Binding Path=Sifra}" HorizontalAlignment="Left" Height="27" Margin="180,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143"/>
-        <TextBox x:Name="tbCenaNamestaja"  Text="{Binding Path=Cena}" HorizontalAlignment="Left" Height="26" Margin="180,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143"/>
-        <TextBox x:Name="tbKolicinaNamestaja"  Text="{Binding Path=Kolicina}" HorizontalAlignment="Left" Height="28" Margin="180,130,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143"/>
-        <ComboBox x:Name="cbTipNamestaja" HorizontalAlignment="Left" Height="27" Margin="180,170,0,0" VerticalAlignment="Top" Width="143" SelectedItem="{Binding Path=TipNamestaja}"/>
+        <Label Content="Cena:" HorizontalAlignment="Left" Margin="80,50,0,0" VerticalAlignment="Top" Width="75" FontSize="14" />
+        <Label Content="Kolicina:" HorizontalAlignment="Left" Height="28" Margin="80,90,0,0" VerticalAlignment="Top" Width="75" />
+        <Label Content="Tip namestaja:" HorizontalAlignment="Left" Height="27" Margin="80,130,0,0" VerticalAlignment="Top" Width="105" />
+        <Button x:Name="btnPotvrdi" Content="Potvrdi" HorizontalAlignment="Left" Height="35" Margin="117,220,0,0" VerticalAlignment="Top" Width="81" IsDefault="True" Click="Potvrdi"/>
+        <Button x:Name="btnOtkazi" Content="Otkazi" HorizontalAlignment="Left" Height="35" Margin="230,220,0,0" VerticalAlignment="Top" Width="81" IsCancel="True"/>
+        <TextBox x:Name="tbNazivNamestaja" Validation.ErrorTemplate="{StaticResource ResourceKey=TextBoxError}" HorizontalAlignment="Left" Height="28" Margin="180,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143">
+            <TextBox.Text>
+                <Binding Path="Naziv" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local:StringValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox x:Name="tbCenaNamestaja"   HorizontalAlignment="Left" Height="26" Margin="180,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143">
+            <TextBox.Text>
+                <Binding Path="Cena" UpdateSourceTrigger="LostFocus">
+                    <Binding.ValidationRules>
+                        <local:DoubleValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox x:Name="tbKolicinaNamestaja" HorizontalAlignment="Left" Height="28" Margin="180,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143">
+            <TextBox.Text>
+                <Binding Path="Kolicina" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local:IntValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <ComboBox x:Name="cbTipNamestaja" HorizontalAlignment="Left" Height="27" Margin="180,130,0,0" VerticalAlignment="Top" Width="143" SelectedItem="{Binding Path=TipNamestaja}"/>
+        <TextBlock x:Name="tbIspisGreske" Margin="40,204,0,0" Foreground="Red" FontWeight="Bold" 
+                           Text="{Binding ElementName=tbCenaNamestaja, Path=(Validation.Errors), Converter={StaticResource ResourceKey=converter}}" 
+                           HorizontalAlignment="Left" Width="364" Height="23" VerticalAlignment="Top"/>
+        <TextBlock x:Name="ispis" Margin="40,232,0,0" Foreground="Red" FontWeight="Bold" 
+                           Text="{Binding ElementName=tbKolicinaNamestaja, Path=(Validation.Errors), Converter={StaticResource ResourceKey=converter}}"
+                           HorizontalAlignment="Left" Width="364" Height="23" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

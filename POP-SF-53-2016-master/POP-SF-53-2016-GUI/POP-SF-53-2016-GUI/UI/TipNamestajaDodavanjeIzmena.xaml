@@ -6,9 +6,28 @@
         xmlns:local="clr-namespace:POP_SF_53_2016_GUI.UI"
         mc:Ignorable="d"
         Title="TipNamestajaDodavanjeIzmena" Height="300" Width="450" Background="#4169E1" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Window.Resources>
+        <ControlTemplate x:Key="TextBoxError">
+            <DockPanel LastChildFill="True">
+                <TextBlock DockPanel.Dock="Right" Foreground="Red" FontSize="12pt">Polje ne sme biti prazno!</TextBlock>
+                <Border BorderBrush="Red" BorderThickness="1">
+                    <AdornedElementPlaceholder />
+                </Border>
+            </DockPanel>
+        </ControlTemplate>
+        <local:ValidationConverter x:Key="converter"/>
+    </Window.Resources>
     <Grid>
         <Label Content="Naziv:" HorizontalAlignment="Left" Height="28" Margin="100,55,0,0" VerticalAlignment="Top" Width="77" RenderTransformOrigin="0.92,0.248"/>
-        <TextBox x:Name="tbNazivTipa" Text="{Binding Path=Naziv}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="28" Margin="180,55,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="141" RenderTransformOrigin="0.894,-0.036"/>
+        <TextBox x:Name="tbNazivTipa" Validation.ErrorTemplate="{StaticResource ResourceKey=TextBoxError}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="28" Margin="180,55,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="141" RenderTransformOrigin="0.894,-0.036">
+            <TextBox.Text>
+                <Binding Path="Naziv" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local:StringValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
         <Button x:Name="btnPotvrdi" Content="Potvrdi" HorizontalAlignment="Left" Height="32" Margin="100,194,0,0" VerticalAlignment="Top" Width="81" Click="Potvrdi"/>
         <Button x:Name="btnOtkazi" Content="Otkazi" HorizontalAlignment="Left" Height="32" Margin="230,194,0,0" VerticalAlignment="Top" Width="81" IsCancel="True"/>
 

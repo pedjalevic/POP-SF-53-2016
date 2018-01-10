@@ -59,6 +59,7 @@
     <Compile Include="DAO\KorisnikDAO.cs" />
     <Compile Include="DAO\NamestajDAO.cs" />
     <Compile Include="DAO\ProdajaDAO.cs" />
+    <Compile Include="DAO\SalonDAO.cs" />
     <Compile Include="DAO\TipNamestajaDAO.cs" />
     <Compile Include="DAO\UslugeDAO.cs" />
     <Compile Include="Model\StavkeProdaje.cs" />
@@ -69,18 +70,24 @@
     <Compile Include="UI\AkcijaDodavanjeIzmene.xaml.cs">
       <DependentUpon>AkcijaDodavanjeIzmene.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\DoubleValidation.cs" />
+    <Compile Include="UI\EmailValidation.cs" />
     <Compile Include="UI\GlavniProzor.xaml.cs">
       <DependentUpon>GlavniProzor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\IntValidation.cs" />
     <Compile Include="UI\IzlistajStavke.xaml.cs">
       <DependentUpon>IzlistajStavke.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\KolicinaValidation.cs" />
     <Compile Include="UI\KorisniciDodavanjeIzmena.xaml.cs">
       <DependentUpon>KorisniciDodavanjeIzmena.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\KorisnickoImeValidation.cs" />
     <Compile Include="UI\NamestajDodavanjeIzmena.xaml.cs">
       <DependentUpon>NamestajDodavanjeIzmena.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\PopustValidation.cs" />
     <Compile Include="UI\PreuzmiNamestaj.xaml.cs">
       <DependentUpon>PreuzmiNamestaj.xaml</DependentUpon>
     </Compile>
@@ -90,12 +97,17 @@
     <Compile Include="UI\ProdajaProzor.xaml.cs">
       <DependentUpon>ProdajaProzor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\SalonProzor.xaml.cs">
+      <DependentUpon>SalonProzor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\StavkeProzor.xaml.cs">
       <DependentUpon>StavkeProzor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\StringValidation.cs" />
     <Compile Include="UI\TipNamestajaDodavanjeIzmena.xaml.cs">
       <DependentUpon>TipNamestajaDodavanjeIzmena.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\ValidationConverter.cs" />
     <Compile Include="Utils\GenericSerializer.cs" />
     <Page Include="UI\DodatneUslugeDodavanjeIzmene.xaml">
       <SubType>Designer</SubType>
@@ -142,6 +154,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\ProdajaProzor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\SalonProzor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -207,6 +223,11 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Data\StavkeProdaje.xml" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="SQL\PravljenjeTabela.sql" />
+    <Content Include="SQL\PunjenjeTabela.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

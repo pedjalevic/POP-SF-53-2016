@@ -6,13 +6,35 @@
         xmlns:local="clr-namespace:POP_SF_53_2016_GUI.UI"
         mc:Ignorable="d"
         Title="StavkeProzor" Height="456" Width="620" Foreground="White" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Background="#4169E1">
+    <Window.Resources>
+        <ControlTemplate x:Key="TextBoxError">
+            <DockPanel LastChildFill="True">
+                <TextBlock DockPanel.Dock="Right" Foreground="Red" FontSize="12pt">Polje ne sme biti prazno!</TextBlock>
+                <Border BorderBrush="Red" BorderThickness="1">
+                    <AdornedElementPlaceholder />
+                </Border>
+            </DockPanel>
+        </ControlTemplate>
+        <local:ValidationConverter x:Key="converter"/>
+    </Window.Resources>
     <Grid>
-        <DataGrid x:Name="dgNamestaj" AutoGenerateColumns="True" ItemsSource="{Binding Source=NamestajProdaja}" CanUserAddRows="False" CanUserDeleteRows="False" SelectionMode="Single" CanUserReorderColumns="True" ColumnWidth="*" HorizontalAlignment="Left" Height="167" Margin="60,191,0,0" VerticalAlignment="Top" Width="471" AutoGeneratingColumn="dgNamestaj_AutoGeneratingColumn" />
+        <DataGrid x:Name="dgNamestaj" IsReadOnly="True" AutoGenerateColumns="True" ItemsSource="{Binding Source=NamestajProdaja}" CanUserAddRows="False" CanUserDeleteRows="False" SelectionMode="Single" CanUserReorderColumns="True" ColumnWidth="*" HorizontalAlignment="Left" Height="167" Margin="60,191,0,0" VerticalAlignment="Top" Width="471" AutoGeneratingColumn="dgNamestaj_AutoGeneratingColumn" LostFocus="dgNamestaj_LostFocus" />
         <Label Content="Izaberite namestaj:" HorizontalAlignment="Left" Height="31" Margin="60,155,0,0" VerticalAlignment="Top" Width="147" FontSize="16" />
-        <Label Content="Kolicina:" HorizontalAlignment="Left" Height="28" Margin="130,57,0,0" VerticalAlignment="Top" Width="77" FontSize="16"/>
-        <TextBox x:Name="tbKolicina" VerticalContentAlignment="Center" Text="{Binding Path=Kolicina}" HorizontalAlignment="Left" Height="28" Margin="213,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="149"/>
+        <Label Content="Kolicina:" HorizontalAlignment="Left" Height="28" Margin="110,57,0,0" VerticalAlignment="Top" Width="77" FontSize="16"/>
+        <TextBox x:Name="tbKolicina" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="28" Margin="193,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="149">
+            <TextBox.Text>
+                <Binding Path="Kolicina" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local:KolicinaValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
         <Button x:Name="btnPotvrdi" Content="Potvrdi" HorizontalAlignment="Left" Height="34" Margin="173,380,0,0" VerticalAlignment="Top" Width="117" IsDefault="True" Click="PotvrdiUslugu"/>
         <Button Content="Otkazi" HorizontalAlignment="Left" Height="34" Margin="319,380,0,0" VerticalAlignment="Top" Width="118" IsCancel="True"/>
+        <TextBlock x:Name="tbIspisGreske"  Margin="346,57,-48,0" Foreground="Red" FontWeight="Bold" 
+                           Text="{Binding ElementName=tbKolicina, Path=(Validation.Errors), Converter={StaticResource ResourceKey=converter}}" 
+                           HorizontalAlignment="Left" Width="296" Height="23" VerticalAlignment="Top" />
 
     </Grid>
 </Window>

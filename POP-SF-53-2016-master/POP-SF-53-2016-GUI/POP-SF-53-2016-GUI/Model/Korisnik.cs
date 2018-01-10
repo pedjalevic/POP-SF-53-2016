@@ -12,7 +12,7 @@ namespace POP_SF_53_2016_GUI.Model
         Administrator,
         Prodavac
     }
-    public class Korisnik : INotifyPropertyChanged
+    public class Korisnik : INotifyPropertyChanged, ICloneable
     {
         private int id;
 
@@ -25,18 +25,30 @@ namespace POP_SF_53_2016_GUI.Model
                 OnPropertyChanged("Id");
             }
         }
+        private string ime;
 
-        private bool obrisan;
-
-        public bool Obrisan
+        public string Ime
         {
-            get { return obrisan; }
+            get { return ime; }
             set
             {
-                obrisan = value;
-                OnPropertyChanged("Obrisan");
+                ime = value;
+                OnPropertyChanged("Ime");
             }
         }
+
+        private string prezime;
+
+        public string Prezime
+        {
+            get { return prezime; }
+            set
+            {
+                prezime = value;
+                OnPropertyChanged("Prezime");
+            }
+        }
+
 
         private string korisnickoIme;
 
@@ -62,29 +74,9 @@ namespace POP_SF_53_2016_GUI.Model
             }
         }
 
-        private string ime;
 
-        public string Ime
-        {
-            get { return ime; }
-            set
-            {
-                ime = value;
-                OnPropertyChanged("Ime");
-            }
-        }
 
-        private string prezime;
 
-        public string Prezime
-        {
-            get { return prezime; }
-            set
-            {
-                prezime = value;
-                OnPropertyChanged("Prezime");
-            }
-        }
 
         private TipKorisnika tipKorisnika;
 
@@ -99,6 +91,20 @@ namespace POP_SF_53_2016_GUI.Model
         }
 
 
+
+        private bool obrisan;
+
+        public bool Obrisan
+        {
+            get { return obrisan; }
+            set
+            {
+                obrisan = value;
+                OnPropertyChanged("Obrisan");
+            }
+        }
+
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public override string ToString()
@@ -108,6 +114,10 @@ namespace POP_SF_53_2016_GUI.Model
                 return $"{Ime} {Prezime} {KorisnickoIme} {Lozinka} {TipKorisnika}";
             }
             return null;
+        }
+        public Korisnik()
+        {
+            tipKorisnika = TipKorisnika.Prodavac;
         }
 
         public static Korisnik PronadjiKorisnika(string userName)
@@ -129,6 +139,7 @@ namespace POP_SF_53_2016_GUI.Model
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
         public object Clone()
         {
             Korisnik kopija = new Korisnik();
