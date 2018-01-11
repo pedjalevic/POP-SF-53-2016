@@ -17,14 +17,14 @@
             <Button Name="btnDodaj" Content="Dodaj" HorizontalAlignment="Left" Margin="40,08,0,0" VerticalAlignment="Top" Width="105" Height="30" Click="btnDodaj_Click"/>
             <Button Name="btnIzmeni" Content="Izmeni" HorizontalAlignment="Left" Margin="170,8,0,0" VerticalAlignment="Top" Width="105" Height="30" Click="btnIzmeni_Click"/>
             <Button Name="btnObrisi" Content="Obrisi" HorizontalAlignment="Left" Margin="300,8,0,0" VerticalAlignment="Top" Width="105" Height="30" Click="btnObrisi_Click"/>
-            <TextBox  Name="tbPretraga" HorizontalAlignment="Left" Height="28" Margin="80,46,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="140" FontSize="14" VerticalContentAlignment="Center"/>
-            <Button Name="btnPretraga" Content="Pretraga" HorizontalAlignment="Left" Margin="250,46,0,0" VerticalAlignment="Top" Width="105" Height="30" Click="btnPretraga_Click"/>
-            <ComboBox x:Name="cbSortiraj" HorizontalAlignment="Left" Height="28" Margin="490,46,0,0" VerticalAlignment="Top" Width="140" SelectionChanged="cbSortiraj_SelectionChanged"/>
-            <Label Content="Sortiraj po:" HorizontalAlignment="Left" Height="32" Margin="395,44,0,0" VerticalAlignment="Top" Width="113" FontSize="16" />
-            <Button x:Name="btnIzlistajStavke" Content="Detalji" HorizontalAlignment="Left" Height="30" Margin="450,8,0,0" VerticalAlignment="Top" Width="105" Click="Izlistaj" />
+            <TextBox  Name="tbPretraga" HorizontalAlignment="Left" Height="28" Margin="165,44,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="140" FontSize="14" VerticalContentAlignment="Center"/>
+            <Button Name="btnPretraga" Content="Pretrazi" HorizontalAlignment="Left" Margin="330,44,0,0" VerticalAlignment="Top" Width="105" Height="28" Click="btnPretraga_Click"/>
+            <ComboBox x:Name="cbSortiraj" HorizontalAlignment="Left" Height="28" Margin="635,44,0,0" VerticalAlignment="Top" Width="140" SelectionChanged="cbSortiraj_SelectionChanged"/>
+            <Label Content="Sortiraj po:" HorizontalAlignment="Left" Height="32" Margin="520,44,0,0" VerticalAlignment="Top" Width="100" FontSize="16" RenderTransformOrigin="1.38,0.579" />
+            <Button x:Name="btnIzlistajStavke" Content="Detalji" HorizontalAlignment="Left" Height="30" Margin="710,8,0,0" VerticalAlignment="Top" Width="105" Click="Izlistaj" />
             <Button x:Name="btnOdjava" Content="Odjava" HorizontalAlignment="Left" Margin="580,8,0,0" VerticalAlignment="Top" Width="105" Height="30" Click="btnOdjava_Click"/>
-            <Button x:Name="btnSalon" Content="Salon" HorizontalAlignment="Left" Margin="710,8,0,0" VerticalAlignment="Top" Width="105" Height="30" Click="btnSalon_Click"/>
-            <Label x:Name="lbNaAkciji" Content="Namestaj na akciji" HorizontalAlignment="Left" Height="28" Margin="670,48,0,0" VerticalAlignment="Top" Width="110" Background="#DEDEDE"/>
+            <Button x:Name="btnSalon" Content="Salon" HorizontalAlignment="Left" Margin="450,8,0,0" VerticalAlignment="Top" Width="105" Height="30" Click="btnSalon_Click"/>
+            <Label Content="Pretraga:" HorizontalAlignment="Left" Margin="70,44,0,0" VerticalAlignment="Top" FontSize="16" RenderTransformOrigin="0.985,0.598"/>
         </Grid>
         <DataGrid ColumnWidth="*" IsReadOnly="True" SelectionMode="Single" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserReorderColumns="False"  Name="dgPrikaz" HorizontalAlignment="Left" Height="375" Grid.Row="1" Margin="0,49,0,-374" AutoGeneratingColumn="dgPrikaz_AutoGeneratingColumn" VerticalAlignment="Top" Width="867" LoadingRow="dgPrikaz_LoadingRow"/>
     </Grid>

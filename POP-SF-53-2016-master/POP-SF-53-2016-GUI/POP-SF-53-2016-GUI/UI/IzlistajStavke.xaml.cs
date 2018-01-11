@@ -55,15 +55,18 @@ namespace POP_SF_53_2016_GUI.UI
                 "PIB:" + s.PIB + "\n" +
                 "Broj racuna: " + prodaja.BrojRacuna + "\n" +
                 "" + crtice2 + "\n";
-            if (prodaja.StavkeProdaje.Count > 0)
-            foreach (var stavka in prodaja.StavkeProdaje)
-            {
-                ispis += "" + stavka.NamestajProdaja.Naziv + "\n" + "\t\t" + stavka.Kolicina + "x";
-                if (stavka.NamestajProdaja.AkcijskaCena > 0)
-                    ispis += " " + stavka.NamestajProdaja.AkcijskaCena + "\t\t" + stavka.Cena + "\n";
-                else
-                    ispis += " " + stavka.NamestajProdaja.Cena + "\t\t" + stavka.Cena + "\n";
-            }
+            if (prodaja.StavkeProdaje != null && prodaja.StavkeProdaje.Count > 0)
+                foreach (var stavka in prodaja.StavkeProdaje)
+                {
+                    if (stavka.NamestajProdaja != null)
+                    {
+                        ispis += "" + stavka.NamestajProdaja.Naziv + "\n" + "\t\t" + stavka.Kolicina + "x";
+                        if (stavka.NamestajProdaja.AkcijskaCena > 0)
+                            ispis += " " + stavka.NamestajProdaja.AkcijskaCena + "\t\t" + stavka.Cena + "\n";
+                        else
+                            ispis += " " + stavka.NamestajProdaja.Cena + "\t\t" + stavka.Cena + "\n";
+                    }
+                }
             if (prodaja.DodatneUsluge.Count == 0)
                 ispis += crtice + "-----";
             else

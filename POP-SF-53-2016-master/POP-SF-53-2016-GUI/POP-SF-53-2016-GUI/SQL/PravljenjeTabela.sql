@@ -1,6 +1,6 @@
-﻿CREATE DATABASE pop-sf53;
+﻿CREATE DATABASE [pop-sf53];
 
-USE pop-sf53;
+USE [pop-sf53];
 
 CREATE TABLE TipNamestaja(
 Id INT IDENTITY(1,1) PRIMARY KEY,

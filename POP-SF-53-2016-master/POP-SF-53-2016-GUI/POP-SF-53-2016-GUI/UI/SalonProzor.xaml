@@ -26,7 +26,7 @@
         <Label Content="PIB:" HorizontalAlignment="Left" Height="29" Margin="108,192,0,0" VerticalAlignment="Top" Width="66" FontSize="16" Foreground="White"/>
         <Label Content="Maticni broj:" HorizontalAlignment="Left" Height="32" Margin="69,225,0,0" VerticalAlignment="Top" Width="105" FontSize="16" Foreground="White"/>
         <Label Content="Ziro racun:" HorizontalAlignment="Left" Height="32" Margin="69,257,0,0" VerticalAlignment="Top" Width="105" FontSize="16" Foreground="White"/>
-        <TextBox x:Name="tbNaziv" Validation.ErrorTemplate="{StaticResource ResourceKey=TextBoxError}" HorizontalAlignment="Left" VerticalContentAlignment="Center" Height="29" Margin="179,23,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="145">
+        <TextBox x:Name="tbNaziv" Validation.ErrorTemplate="{StaticResource ResourceKey=TextBoxError}" HorizontalAlignment="Left" VerticalContentAlignment="Center" Height="29" Margin="179,23,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="145" MaxLength="50">
             <TextBox.Text>
                 <Binding Path="Naziv" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -35,7 +35,7 @@
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <TextBox x:Name="tbAdresa" Validation.ErrorTemplate="{StaticResource ResourceKey=TextBoxError}" HorizontalAlignment="Left" VerticalContentAlignment="Center" Height="29" Margin="179,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="145">
+        <TextBox x:Name="tbAdresa" Validation.ErrorTemplate="{StaticResource ResourceKey=TextBoxError}" HorizontalAlignment="Left" VerticalContentAlignment="Center" Height="29" Margin="179,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="145" MaxLength="50">
             <TextBox.Text>
                 <Binding Path="Adresa" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -44,7 +44,7 @@
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <TextBox x:Name="tbTelefon" Validation.ErrorTemplate="{StaticResource ResourceKey=TextBoxError}" HorizontalAlignment="Left" VerticalContentAlignment="Center" Height="29" Margin="179,91,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="145">
+        <TextBox x:Name="tbTelefon" Validation.ErrorTemplate="{StaticResource ResourceKey=TextBoxError}" HorizontalAlignment="Left" VerticalContentAlignment="Center" Height="29" Margin="179,91,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="145" MaxLength="20">
             <TextBox.Text>
                 <Binding Path="Broj_telefona" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -53,7 +53,7 @@
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <TextBox x:Name="tbEmail"  HorizontalAlignment="Left" VerticalContentAlignment="Center" Height="29" Margin="179,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="145">
+        <TextBox x:Name="tbEmail"  HorizontalAlignment="Left" VerticalContentAlignment="Center" Height="29" Margin="179,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="145" MaxLength="20">
             <TextBox.Text>
                 <Binding Path="Email" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -62,7 +62,7 @@
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <TextBox x:Name="tbSajt"  Validation.ErrorTemplate="{StaticResource ResourceKey=TextBoxError}" HorizontalAlignment="Left" VerticalContentAlignment="Center" Height="29" Margin="179,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="145">
+        <TextBox x:Name="tbSajt"  Validation.ErrorTemplate="{StaticResource ResourceKey=TextBoxError}" HorizontalAlignment="Left" VerticalContentAlignment="Center" Height="29" Margin="179,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="145" MaxLength="18">
             <TextBox.Text>
                 <Binding Path="Adresa_sajta" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -71,7 +71,7 @@
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <TextBox x:Name="tbPIB" Validation.ErrorTemplate="{StaticResource ResourceKey=TextBoxError}" HorizontalAlignment="Left" VerticalContentAlignment="Center" Height="29" Margin="179,194,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="145">
+        <TextBox x:Name="tbPIB" Validation.ErrorTemplate="{StaticResource ResourceKey=TextBoxError}" HorizontalAlignment="Left" VerticalContentAlignment="Center" Height="29" Margin="179,194,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="145" MaxLength="20">
             <TextBox.Text>
                 <Binding Path="PIB" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -89,7 +89,7 @@
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <TextBox x:Name="tbZiroRacun" Validation.ErrorTemplate="{StaticResource ResourceKey=TextBoxError}"  HorizontalAlignment="Left" VerticalContentAlignment="Center" Height="29" Margin="179,262,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="145">
+        <TextBox x:Name="tbZiroRacun" Validation.ErrorTemplate="{StaticResource ResourceKey=TextBoxError}"  HorizontalAlignment="Left" VerticalContentAlignment="Center" Height="29" Margin="179,262,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="145" MaxLength="20">
             <TextBox.Text>
                 <Binding Path="Broj_ziro_racuna" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -98,7 +98,28 @@
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <Button x:Name="btnPotvrdi" Content="Potvrdi" HorizontalAlignment="Left" Height="33" Margin="149,368,0,0" VerticalAlignment="Top" Width="95" Click="Potvrdi"/>
+        <Button x:Name="btnPotvrdi" Content="Potvrdi" HorizontalAlignment="Left" Height="33" Margin="149,368,0,0" VerticalAlignment="Top" Width="95" Click="Potvrdi">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="IsEnabled" Value="False"/>
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=tbNaziv}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=tbAdresa}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=tbEmail}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=tbTelefon}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=tbPIB}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=tbMaticni}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=tbSajt}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=tbZiroRacun}" Value="False"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="True"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
         <Button x:Name="btnOdustani" Content="Odustani" HorizontalAlignment="Left" Height="33" Margin="268,368,0,0" VerticalAlignment="Top" Width="95"  Click="btnOdustani_Click"/>
         <TextBlock x:Name="tbcIspis" HorizontalAlignment="Left" Height="318" Margin="69,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="401" Background="White" FontSize="16" FontWeight="Bold"/>
         <TextBlock x:Name="tbGreskaMaticniBroj"  Margin="117,310,0,0" Foreground="Red" FontWeight="Bold" Text="{Binding ElementName=tbMaticni, Path=(Validation.Errors), Converter={StaticResource ResourceKey=converter}}" HorizontalAlignment="Left" Width="364" Height="23" VerticalAlignment="Top" />

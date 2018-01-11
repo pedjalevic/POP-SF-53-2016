@@ -22,9 +22,25 @@
         <Label Content="Cena:" HorizontalAlignment="Left" Margin="80,50,0,0" VerticalAlignment="Top" Width="75" FontSize="14" />
         <Label Content="Kolicina:" HorizontalAlignment="Left" Height="28" Margin="80,90,0,0" VerticalAlignment="Top" Width="75" />
         <Label Content="Tip namestaja:" HorizontalAlignment="Left" Height="27" Margin="80,130,0,0" VerticalAlignment="Top" Width="105" />
-        <Button x:Name="btnPotvrdi" Content="Potvrdi" HorizontalAlignment="Left" Height="35" Margin="117,220,0,0" VerticalAlignment="Top" Width="81" IsDefault="True" Click="Potvrdi"/>
+        <Button x:Name="btnPotvrdi" Content="Potvrdi" HorizontalAlignment="Left" Height="35" Margin="117,220,0,0" VerticalAlignment="Top" Width="81" IsDefault="True" Click="Potvrdi">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="IsEnabled" Value="False"/>
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=tbKolicinaNamestaja}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=tbNazivNamestaja}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=tbCenaNamestaja}" Value="False"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="True"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
         <Button x:Name="btnOtkazi" Content="Otkazi" HorizontalAlignment="Left" Height="35" Margin="230,220,0,0" VerticalAlignment="Top" Width="81" IsCancel="True"/>
-        <TextBox x:Name="tbNazivNamestaja" Validation.ErrorTemplate="{StaticResource ResourceKey=TextBoxError}" HorizontalAlignment="Left" Height="28" Margin="180,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143">
+        <TextBox x:Name="tbNazivNamestaja" Validation.ErrorTemplate="{StaticResource ResourceKey=TextBoxError}" HorizontalAlignment="Left" Height="28" Margin="180,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143" MaxLength="20">
             <TextBox.Text>
                 <Binding Path="Naziv" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -52,10 +68,10 @@
             </TextBox.Text>
         </TextBox>
         <ComboBox x:Name="cbTipNamestaja" HorizontalAlignment="Left" Height="27" Margin="180,130,0,0" VerticalAlignment="Top" Width="143" SelectedItem="{Binding Path=TipNamestaja}"/>
-        <TextBlock x:Name="tbIspisGreske" Margin="40,204,0,0" Foreground="Red" FontWeight="Bold" 
+        <TextBlock x:Name="tbIspisGreske" Margin="40,164,0,0" Foreground="Red" FontWeight="Bold" 
                            Text="{Binding ElementName=tbCenaNamestaja, Path=(Validation.Errors), Converter={StaticResource ResourceKey=converter}}" 
                            HorizontalAlignment="Left" Width="364" Height="23" VerticalAlignment="Top"/>
-        <TextBlock x:Name="ispis" Margin="40,232,0,0" Foreground="Red" FontWeight="Bold" 
+        <TextBlock x:Name="ispis" Margin="40,192,0,0" Foreground="Red" FontWeight="Bold" 
                            Text="{Binding ElementName=tbKolicinaNamestaja, Path=(Validation.Errors), Converter={StaticResource ResourceKey=converter}}"
                            HorizontalAlignment="Left" Width="364" Height="23" VerticalAlignment="Top"/>
 

@@ -14,7 +14,7 @@ namespace POP_SF_53_2016_GUI.Model
     {
         public ProdajaNamestaja()
         {
-            datumProdaje = DateTime.Today;
+            datumProdaje = DateTime.Now;
             stavkeProdaje = new ObservableCollection<StavkaProdaje>();
             dodatneUsluge = new ObservableCollection<DodatneUsluge>();
             dodatneUslugeId = new List<int>();

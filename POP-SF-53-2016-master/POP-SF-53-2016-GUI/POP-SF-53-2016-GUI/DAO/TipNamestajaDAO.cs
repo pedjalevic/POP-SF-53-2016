@@ -64,9 +64,8 @@ namespace POP_SF_53_2016_GUI.DAO
             {
                 if (n.TipNamestaja.Id == t.Id)
                 {
-                    n.TipNamestajaId = 0;
-                    n.TipNamestaja = null;
-                    NamestajDAO.IzmenaNamestaja(n);
+                    n.Obrisan = true;
+                    NamestajDAO.BrisanjeNamestaja(n);
                 }
             }
             return IzmenaTipa(t);

@@ -174,14 +174,13 @@ namespace POP_SF_53_2016_GUI.DAO
                         cm.Parameters.Add(new SqlParameter("@prodajaId", p.Id));
                         cm.ExecuteNonQuery();
 
-                        var n = stavke[i].NamestajProdaja;
-                        n.Kolicina += stavke[i].Kolicina;
+                        stavke[i].NamestajProdaja.Kolicina += stavke[i].Kolicina;
                         foreach (var namestaj in Projekat.Instance.Namestaj)
                         {
-                            if (namestaj.Id == n.Id)
-                                namestaj.Kolicina = n.Kolicina;
+                            if (namestaj.Id == stavke[i].NamestajProdaja.Id)
+                                namestaj.Kolicina = stavke[i].NamestajProdaja.Kolicina;
                         }
-                        NamestajDAO.IzmenaNamestaja(n);
+                        NamestajDAO.IzmenaNamestaja(stavke[i].NamestajProdaja);
                     }
                     return true;
                 }
@@ -214,12 +213,6 @@ namespace POP_SF_53_2016_GUI.DAO
                             {
                                 namestaj.Kolicina = namestaj.Kolicina - stavke[i].Kolicina;
                                 NamestajDAO.IzmenaNamestaja(namestaj);
-                            }
-                            if (namestaj.Kolicina == 0)
-                            {
-                                namestaj.Obrisan = true;
-                                NamestajDAO.BrisanjeNamestaja(namestaj);
-                                Projekat.Instance.Namestaj.Remove(namestaj);
                             }
 
                         }
@@ -281,8 +274,9 @@ namespace POP_SF_53_2016_GUI.DAO
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Konekcija"].ToString()))
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand(@"SELECT Id,Kupac,Broj_Racuna,Datum_Prodaje,Ukupan_Iznos FROM Prodaja WHERE Obrisan=@obrisan 
-                AND(Kupac LIKE @tekst OR Broj_Racuna LIKE @tekst OR Datum_Prodaje LIKE @tekst OR Ukupan_Iznos LIKE @tekst)", conn);
+                SqlCommand cmd = new SqlCommand(@"SELECT DISTINCT p.Id,Kupac,Broj_Racuna,Datum_Prodaje,Ukupan_Iznos FROM Prodaja p JOIN Stavka s ON s.ProdajaId=p.Id JOIN Namestaj
+    n ON n.Id = s.NamestajId JOIN ProdateUsluge pu ON pu.ProdajaId=p.Id JOIN DodatneUsluge du ON du.Id=pu.UslugeId WHERE p.Obrisan=@obrisan 
+                AND(Kupac LIKE @tekst OR Broj_Racuna LIKE @tekst OR Datum_Prodaje LIKE @tekst OR Ukupan_Iznos LIKE @tekst OR n.Naziv LIKE @tekst OR du.Naziv LIKE @tekst)", conn);
                 cmd.Parameters.Add(new SqlParameter("@obrisan", '0'));
                 cmd.Parameters.Add(new SqlParameter("@tekst", "%" + tekst + "%"));
                 SqlDataReader reader = cmd.ExecuteReader();
